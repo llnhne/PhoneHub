@@ -24,9 +24,9 @@
         </li>
 
         <li>
-            <a href="javascript: void(0);">
+            <a href="{{ route('listing.index', ['model'=>'Categories']) }}">
                 <i class="ti-menu-alt"></i>
-                <span> Danh mục </span>
+                <span> Quản lý danh mục </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
@@ -36,9 +36,9 @@
         </li>
 
         <li>
-            <a href="javascript: void(0);">
+            <a href="{{ route('listing.index', ['model'=>'Products']) }}">
                 <i class="ti-menu-alt"></i>
-                <span> Sản phẩm </span>
+                <span> Quản lý điện thoại </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
@@ -48,33 +48,34 @@
         </li>
 
         <li>
-            <a href="javascript: void(0);">
+            <a href="{{ route('listing.index', ['model'=>'Sales']) }}">
                 <i class="ti-menu-alt"></i>
-                <span> Thông tin đơn hàng </span>
+                <span> Quản lý khuyến mãi </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="tables-advanced.html">Danh sách</a></li>
+                <li><a href="tables-basic.html">Thêm</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="{{ route('listing.index', ['model'=>'Banners']) }}">
+                <i class="ti-menu-alt"></i>
+                <span> Quản lý banner </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level" aria-expanded="false">
+                <li><a href="tables-advanced.html">Danh sách</a></li>
+                <li><a href="tables-basic.html">Thêm</a></li>
                 
             </ul>
         </li>
 
         <li>
-            <a href="javascript: void(0);">
+            <a href="{{ route('listing.index', ['model'=>'Orders']) }}">
                 <i class="ti-menu-alt"></i>
-                <span> Thông tin thanh toán </span>
-                <span class="menu-arrow"></span>
-            </a>
-            <ul class="nav-second-level" aria-expanded="false">
-                <li><a href="tables-advanced.html">Danh sách</a></li>
-                
-            </ul>
-        </li>
-
-        <li>
-            <a href="javascript: void(0);">
-                <i class="ti-menu-alt"></i>
-                <span> Thông tin khách hàng </span>
+                <span> Quản lý hóa đơn </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
@@ -83,7 +84,7 @@
         </li>
 
         <li>
-            <a href="javascript: void(0);">
+            <a href="{{ route('listing.index', ['model'=>'Admin']) }}">
                 <i class="ti-menu-alt"></i>
                 <span> Thông tin tài khoản </span>
                 <span class="menu-arrow"></span>
