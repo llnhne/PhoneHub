@@ -3,31 +3,31 @@
     <li class="dropdown d-none d-lg-block">
         <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
             aria-expanded="false">
-            <img src="..\assets\images\flags\us.jpg" alt="user-image" class="mr-2" height="12"> <span
-                class="align-middle">English <i class="mdi mdi-chevron-down"></i> </span>
+            <img src="{{URL::asset('assets\images\flags\vietnam.png')}}" alt="user-image" class="mr-2" height="30"> <span
+                class="align-middle">Việt Nam <i class="mdi mdi-chevron-down"></i> </span>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
             <!-- item-->
             <a href="javascript:void(0);" class="dropdown-item notify-item">
-                <img src="..\assets\images\flags\spain.jpg" alt="user-image" class="mr-2" height="12">
+                <img src="{{URL::asset('assets\images\flags\spain.jpg')}}" alt="user-image" class="mr-2" height="12">
                 <span class="align-middle">Spanish</span>
             </a>
 
             <!-- item-->
             <a href="javascript:void(0);" class="dropdown-item notify-item">
-                <img src="..\assets\images\flags\italy.jpg" alt="user-image" class="mr-2" height="12">
+                <img src="{{URL::asset('assets\images\flags\italy.jpg')}}" alt="user-image" class="mr-2" height="12">
                 <span class="align-middle">Italian</span>
             </a>
 
             <!-- item-->
             <a href="javascript:void(0);" class="dropdown-item notify-item">
-                <img src="..\assets\images\flags\french.jpg" alt="user-image" class="mr-2" height="12">
+                <img src="{{URL::asset('assets\images\flags\french.jpg')}}" alt="user-image" class="mr-2" height="12">
                 <span class="align-middle">French</span>
             </a>
 
             <!-- item-->
             <a href="javascript:void(0);" class="dropdown-item notify-item">
-                <img src="..\assets\images\flags\russia.jpg" alt="user-image" class="mr-2" height="12">
+                <img src="{{URL::asset('assets\images\flags\russia.jpg')}}" alt="user-image" class="mr-2" height="12">
                 <span class="align-middle">Russian</span>
             </a>
         </div>
@@ -107,7 +107,7 @@
     <li class="dropdown notification-list">
         <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button"
             aria-haspopup="false" aria-expanded="false">
-            <img src="..\assets\images\users\z4435236404058_d897e523676d1a75ce4bd021a5f50a79.jpg" alt="user-image"
+            <img src="{{URL::asset('assets\images\users\ava.jpg')}}" alt="user-image"
                 class="rounded-circle">
             <span class="pro-user-name ml-1">
                 <?= $user->name ?> <i class="mdi mdi-chevron-down"></i>
@@ -161,23 +161,23 @@
 <div class="logo-box">
     <a href="index.html" class="logo text-center logo-dark">
         <span class="logo-lg">
-            <img src="..\assets\images\logo-dark.png" alt="" height="26">
+            <img src="{{URL::asset('assets\images\logo-dark.png')}}" alt="" height="26">
             <!-- <span class="logo-lg-text-dark">Simple</span> -->
         </span>
         <span class="logo-sm">
             <!-- <span class="logo-lg-text-dark">S</span> -->
-            <img src="..\assets\images\logo-sm.png" alt="" height="22">
+            <img src="{{URL::asset('assets\images\logo-sm.png')}}" alt="" height="22">
         </span>
     </a>
 
     <a href="index.html" class="logo text-center logo-light">
         <span class="logo-lg">
-            <img src="..\assets\images\logo-light.png" alt="" height="26">
+            <img src="{{URL::asset('assets\images\logo-light.png')}}" alt="" height="26">
             <!-- <span class="logo-lg-text-light">Simple</span> -->
         </span>
         <span class="logo-sm">
             <!-- <span class="logo-lg-text-light">S</span> -->
-            <img src="..\assets\images\logo-sm.png" alt="" height="22">
+            <img src="{{URL::asset('assets\images\logo-sm.png')}}" alt="" height="22">
         </span>
     </a>
 </div>
@@ -193,7 +193,7 @@
         <form class="app-search">
             <div class="app-search-box">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search...">
+                    <input type="text" class="form-control" placeholder="Search{{URL::asset('')}}.">
                     <div class="input-group-append">
                         <button class="btn" type="submit">
                             <i class="fas fa-search"></i>

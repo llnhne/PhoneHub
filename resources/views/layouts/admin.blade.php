@@ -9,11 +9,11 @@
     <meta content="Coderthemes" name="author">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="..\assets\images\favicon.ico">
+    <link rel="shortcut icon" href="{{URL::asset('assets\images\favicon.ico')}}">
     <!-- App css -->
-    <link href="..\assets\css\bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
-    <link href="..\assets\css\icons.min.css" rel="stylesheet" type="text/css">
-    <link href="..\assets\css\app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet">
+    <link href="{{URL::asset('assets\css\bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
+    <link href="{{URL::asset('assets\css\icons.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{URL::asset('assets\css\app.min.css')}}" rel="stylesheet" type="text/css" id="app-stylesheet">
 
 </head>
 
@@ -63,7 +63,7 @@
                     <strong>Customize </strong> the overall color scheme, layout, etc.
                 </div>
                 <div class="mb-2">
-                    <img src="..\assets\images\layouts\light.png" class="img-fluid img-thumbnail" alt="">
+                    <img src="{{URL::asset('assets\images\layouts\light.png')}}" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
                     <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch"
@@ -72,21 +72,21 @@
                 </div>
 
                 <div class="mb-2">
-                    <img src="..\assets\images\layouts\dark.png" class="img-fluid img-thumbnail" alt="">
+                    <img src="{{URL::asset('assets\images\layouts\dark.png')}}" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
                     <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch"
-                        data-bsstyle="..\assets/css/bootstrap-dark.min.css"
-                        data-appstyle="..\assets/css/app-dark.min.css">
+                        data-bsstyle="{{URL::asset('assets/css/bootstrap-dark.min.css')}}"
+                        data-appstyle="{{URL::asset('assets/css/app-dark.min.css')}}">
                     <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
                 </div>
 
                 <div class="mb-2">
-                    <img src="..\assets\images\layouts\rtl.png" class="img-fluid img-thumbnail" alt="">
+                    <img src="{{URL::asset('assets\images\layouts\rtl.png')}}" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-5">
                     <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch"
-                        data-appstyle="..\assets/css/app-rtl.min.css">
+                        data-appstyle="{{URL::asset('assets/css/app-rtl.min.css')}}">
                     <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
                 </div>
 
@@ -105,15 +105,15 @@
     </a>
 
     <!-- Vendor js -->
-    <script src="..\assets\js\vendor.min.js"></script>
+    <script src="{{URL::asset('assets\js\vendor.min.js')}}"></script>
 
-    <script src="..\assets\libs\morris-js\morris.min.js"></script>
-    <script src="..\assets\libs\raphael\raphael.min.js"></script>
+    <script src="{{URL::asset('assets\libs\morris-js\morris.min.js')}}"></script>
+    <script src="{{URL::asset('assets\libs\raphael\raphael.min.js')}}"></script>
 
-    <script src="..\assets\js\pages\dashboard.init.js"></script>
+    <script src="{{URL::asset('assets\js\pages\dashboard.init.js')}}"></script>
 
     <!-- App js -->
-    <script src="..\assets\js\app.min.js"></script>
+    <script src="{{URL::asset('assets\js\app.min.js')}}"></script>
 
 </body>
 

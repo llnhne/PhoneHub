@@ -7,8 +7,20 @@ use Illuminate\Support\Facades\Auth;
 
 class ListingController extends Controller
 {
-    public function index(Request $request, $model){
+    public function index(Request $request, $modelName){
         $adminUsers = Auth::guard('admin')->user();
-        return view('admin.listing', ['user' => $adminUsers]);
+        $model = '\App\Models\\'.ucfirst($modelName);
+        $model = new $model;
+        $configs = $model->listingConfigs();
+        $condition = [
+            
+        ];
+        $records = $model::where($condition)->paginate(10);
+        return view('admin.listing', [
+            'user' => $adminUsers,
+            'records' => $records,
+            'configs' => $configs,
+            'title' => $model->title
+        ]);
     }
 }
