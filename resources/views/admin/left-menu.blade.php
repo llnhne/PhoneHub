@@ -73,13 +73,13 @@
         </li>
 
         <li>
-            <a href="{{ route('listing.index', ['model'=>'Orders']) }}">
+            <a href="{{ route('listing.index', ['model'=>'Bills']) }}">
                 <i class="ti-printer"></i>
                 <span> Quản lý hóa đơn </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
-                <li><a href="{{ route('listing.index', ['model'=>'Orders']) }}">Danh sách</a></li>
+                <li><a href="{{ route('listing.index', ['model'=>'Bills']) }}">Danh sách</a></li>
             </ul>
         </li>
 

@@ -12,15 +12,27 @@ class ListingController extends Controller
         $model = '\App\Models\\'.ucfirst($modelName);
         $model = new $model;
         $configs = $model->listingConfigs();
-        $condition = [
-            
+        $filterResult = $model->getFilter($request, $configs, $modelName);
+        $orderBy = [
+            'field' => 'id',
+            'sort' => 'desc'
         ];
-        $records = $model::where($condition)->paginate(10);
+        if($request->input('sort')){
+            $field = substr($request->input('sort'),0, strpos($request->input('sort'), "_"));
+            $sort = substr($request->input('sort'), strpos($request->input('sort'), "_") + 1);
+            $orderBy = [
+                'field' => $field,
+                'sort' => $sort
+            ];
+        }
+        $records = $model->getRecords($filterResult['conditions'], $orderBy);
         return view('admin.listing', [
             'user' => $adminUsers,
             'records' => $records,
-            'configs' => $configs,
-            'title' => $model->title
+            'configs' => $filterResult['configs'],
+            'modelName' => $modelName,
+            'title' => $model->title,
+            'orderBy' => $orderBy
         ]);
     }
 }

@@ -15,17 +15,21 @@ class Admin extends Base implements AuthenticatableContract
     public $title = 'Quản Lý Tài Khoản';
     public function listingConfigs()
     {
-        $defaultListingconfigs = parent::defaultlistingConfigs();
+        // $defaultListingconfigs = parent::defaultlistingConfigs();
         $listingconfigs = array(
             array(
                 'field' => 'id',
                 'name' => 'ID',
-                'type' => 'text'
+                'type' => 'text',
+                'filter' => 'equal',
+                'sort' => true
             ),
             array(
                 'field' => 'name',
                 'name' => 'Tên quản trị viên',
-                'type' => 'text'
+                'type' => 'text',
+                'filter' => 'like',
+                'sort' => true
             ),
             array(
                 'field' => 'image',
@@ -35,9 +39,34 @@ class Admin extends Base implements AuthenticatableContract
             array(
                 'field' => 'email',
                 'name' => 'Email quản trị viên',
-                'type' => 'text'
+                'type' => 'text',
+                'sort' => true
+            ),
+            array(
+                'field' => 'created_at',
+                'name' => 'Ngày tạo',
+                'type' => 'text',
+                'sort' => true
+            ),
+            array(
+                'field' => 'updated_at',
+                'name' => 'Ngày cập nhật',
+                'type' => 'text',
+                'sort' => true
+            ),
+            array(
+                'field' => 'name',
+                'name' => 'Chi tiết',
+                'type' => 'about',
+                'filter' => 'about'
+            ),
+            array(
+                'field' => 'name',
+                'name' => 'Xóa',
+                'type' => 'delete',
+                'filter' => 'delete'
             )
         );
-        return array_merge($listingconfigs,$defaultListingconfigs);
+        return array_merge($listingconfigs);
     }
 }

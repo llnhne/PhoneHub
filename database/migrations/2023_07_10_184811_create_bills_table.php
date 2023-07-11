@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image')->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('bill_name')->unique();
+            $table->string('user_name');
+            $table->string('email');
             $table->string('phone_number');
             $table->string('address');
+            $table->float('sum_price', 12, 0);
+            $table->text('description')->nullable();
+            $table->unsignedInteger('users_id');
+            $table->unsignedInteger('pays_id');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('bills');
     }
 };
