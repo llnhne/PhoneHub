@@ -18,18 +18,21 @@ class Bills extends Base
                 'field' => 'id',
                 'name' => 'ID',
                 'type' => 'text',
+                'filter' => 'equal',
                 'sort' => true
             ),
             array(
                 'field' => 'name',
                 'name' => 'Tên sản phẩm',
                 'type' => 'text',
+                'filter' => 'like',
                 'sort' => true
             ),
             array(
                 'field' => 'price',
                 'name' => 'Giá sản phẩm',
                 'type' => 'number',
+                'filter' => 'between',
                 'sort' => true
             ),
             array(

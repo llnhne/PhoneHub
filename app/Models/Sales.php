@@ -18,24 +18,28 @@ class Sales extends Base
                 'field' => 'id',
                 'name' => 'ID',
                 'type' => 'text',
+                'filter' => 'equal',
                 'sort' => true
             ),
             array(
                 'field' => 'name',
                 'name' => 'Tên khuyến mãi',
                 'type' => 'text',
+                'filter' => 'like',
                 'sort' => true
             ),
             array(
                 'field' => 'price',
-                'name' => 'Giá sản phẩm',
+                'name' => 'Giá gốc',
                 'type' => 'number',
+                'filter' => 'between',
                 'sort' => true
             ),
             array(
-                'field' => 'image',
-                'name' => 'Ảnh sản phẩm',
-                'type' => 'image'
+                'field' => 'price_sales',
+                'name' => 'Giá giảm',
+                'type' => 'number',
+                'sort' => true
             ),
             array(
                 'field' => 'created_at',

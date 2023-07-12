@@ -19,7 +19,7 @@
         <li>
             <a href="{{ route('admin.dashboard') }}">
                 <i class="ti-home"></i>
-                <span> Home</span>
+                <span> Trang chủ</span>
             </a>
         </li>
 
@@ -31,7 +31,7 @@
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{ route('listing.index', ['model'=>'Categories']) }}">Danh sách</a></li>
-                <li><a href="tables-basic.html">Thêm</a></li>
+                <li><a href="{{ route('editing.create', ['model'=>'Categories']) }}">Thêm</a></li>
             </ul>
         </li>
 
@@ -43,7 +43,7 @@
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{ route('listing.index', ['model'=>'Products']) }}">Danh sách</a></li>
-                <li><a href="tables-basic.html">Thêm</a></li>
+                <li><a href="{{ route('editing.create', ['model'=>'Products']) }}">Thêm</a></li>
             </ul>
         </li>
 
@@ -55,7 +55,7 @@
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{ route('listing.index', ['model'=>'Sales']) }}">Danh sách</a></li>
-                <li><a href="tables-basic.html">Thêm</a></li>
+                <li><a href="{{ route('editing.create', ['model'=>'Sales']) }}">Thêm</a></li>
             </ul>
         </li>
 
@@ -67,7 +67,7 @@
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{ route('listing.index', ['model'=>'Banners']) }}">Danh sách</a></li>
-                <li><a href="tables-basic.html">Thêm</a></li>
+                <li><a href="{{ route('editing.create', ['model'=>'Banners']) }}">Thêm</a></li>
                 
             </ul>
         </li>
@@ -90,7 +90,8 @@
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
-                <li><a href="{{ route('listing.index', ['model'=>'Admin']) }}">Danh sách</a></li>
+                <li><a href="{{ route('listing.index', ['model'=>'Admin']) }}">Admins</a></li>
+                <li><a href="{{ route('listing.index', ['model'=>'User']) }}">Users</a></li>
             </ul>
         </li>
 

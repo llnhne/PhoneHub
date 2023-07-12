@@ -18,12 +18,14 @@ class Banners extends Base
                 'field' => 'id',
                 'name' => 'ID',
                 'type' => 'text',
+                'filter' => 'equal',
                 'sort' => true
             ),
             array(
                 'field' => 'name',
                 'name' => 'Tên Banner',
                 'type' => 'text',
+                'filter' => 'like',
                 'sort' => true
             ),
             array(

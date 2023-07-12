@@ -80,30 +80,30 @@
                                         @if (!empty($config['sort']))
                                             @if ($orderBy['field'] == $config['field'])
                                                 @if ($orderBy['sort'] == 'desc')
-                                                    <th>
+                                                    <th class="align-middle">
                                                         {{ $config['name'] }}
-                                                        <a
-                                                            class="float-end" href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'].'_asc']) }}"><i
+                                                        <a class=""
+                                                            href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'] . '_asc']) }}"><i
                                                                 class="ti-arrow-down"></i></a>
                                                     </th>
                                                 @else
-                                                    <th>
+                                                    <th class="align-middle">
                                                         {{ $config['name'] }}
-                                                        <a
-                                                            class="float-end" href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'].'_desc']) }}"><i
+                                                        <a class=""
+                                                            href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'] . '_desc']) }}"><i
                                                                 class="ti-arrow-up"></i></a>
                                                     </th>
                                                 @endif
                                             @else
-                                                <th>
+                                                <th class="align-middle">
                                                     {{ $config['name'] }}
-                                                    <a
-                                                        class="float-end" href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'].'_desc']) }}"><i
+                                                    <a class=""
+                                                        href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'] . '_desc']) }}"><i
                                                             class="ti-exchange-vertical"></i></a>
                                                 </th>
                                             @endif
                                         @else
-                                            <th class="text-center">
+                                            <th class="align-middle">
                                                 {{ $config['name'] }}
                                             </th>
                                         @endif
@@ -117,36 +117,39 @@
                                         @foreach ($configs as $config)
                                             @switch($config['type'])
                                                 @case('text')
-                                                    <td class="">{{ $record[$config['field']] }}</td>
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
                                                 @break
 
                                                 @case('image')
-                                                    <td class=""><img height="50"
+                                                    <td class="align-middle"><img height="50"
                                                             onerror="this.src='/assets/images/users/ava.jpg'"
                                                             src="{{ $record[$config['field']] }}" alt="" srcset="">
                                                     </td>
                                                 @break
 
                                                 @case('number')
-                                                    <td class="">{{ number_format($record[$config['field']], 0, ',', ',') }}
+                                                    <td class="align-middle">
+                                                        {{ number_format($record[$config['field']], 0, ',', ',') }}
                                                     </td>
                                                 @break
 
                                                 @case('about')
-                                                    <td>
+                                                    <td class="align-middle">
                                                         <a href="#"><i class="ti-info-alt"></i></a>
 
                                                     </td>
                                                 @break
 
                                                 @case('edit')
-                                                    <td>
+                                                    <td class="align-middle">
                                                         <a href="#"><i class="ti-marker-alt mx-2"></i></a>
                                                     </td>
                                                 @break
 
                                                 @case('delete')
-                                                    <td><a href="#"><i class="ti-trash"></i></a></td>
+                                                    <td class="align-middle"><a href="#"><i class="ti-trash"></i></a></td>
                                                 @break
 
                                                 @default

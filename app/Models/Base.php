@@ -10,6 +10,23 @@ class Base extends Model
 {
     use HasFactory;
 
+    public function listingConfigs(){
+        return $this->getConfigs('listing');
+    }
+    public function editingConfigs(){
+        return $this->getConfigs('editing');
+    }
+    public function getConfigs($interface){
+        $configs = $this->configs();
+        $result = [];
+        foreach($configs as $config){
+            if(!empty($config[$interface]) && $config[$interface] == true){
+                $result[] = $config;
+            }
+        }
+        return $result;
+    }
+
     public function getRecords($conditions, $orderBy)
     {
         $per_page = 5;

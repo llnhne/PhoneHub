@@ -16,6 +16,21 @@
     <link href="{{URL::asset('assets\css\app.min.css')}}" rel="stylesheet" type="text/css" id="app-stylesheet">
 
 </head>
+<style>
+    #container {
+        width: 1000px;
+        margin: 20px auto;
+    }
+    .ck-editor__editable[role="textbox"] {
+        /* editing area */
+        min-height: 200px;
+    }
+    .ck-content .image {
+        /* block images */
+        max-width: 80%;
+        margin: 20px auto;
+    }
+</style>
 
 <body>
 
@@ -114,7 +129,15 @@
 
     <!-- App js -->
     <script src="{{URL::asset('assets\js\app.min.js')}}"></script>
-
+    <!-- App Editor 5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 </body>
 
 </html>
