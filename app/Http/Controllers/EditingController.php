@@ -15,6 +15,7 @@ class EditingController extends Controller
         return view('admin.editing',[
             'user' => $adminUsers,
             'modelName' => $modelName,
+            'titlecreate' => $model->titlecreate,
             'configs' => $configs
         ]);
     }
@@ -26,6 +27,9 @@ class EditingController extends Controller
             'category_id' => 'required',
             'ckeditor' => 'required|max:1000'
         ]);
+        
+        $input = $request->all();
+        dd($input);exit();
         $adminUsers = Auth::guard('admin')->user();
         $model = '\App\Models\\'.ucfirst($modelName);
         $model = new $model;

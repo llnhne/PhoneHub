@@ -10,7 +10,8 @@ class Categories extends Base
 {
     use HasFactory;
     public $title = 'Quản Lý Danh Mục';
-    public function listingConfigs()
+    public $titlecreate = 'Thêm Mới - Danh Mục Sản Phẩm';
+    public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
         $listingconfigs = array(
@@ -19,44 +20,65 @@ class Categories extends Base
                 'name' => 'ID',
                 'type' => 'text',
                 'filter' => 'equal',
-                'sort' => true
+                'sort' => true,
+                'listing' => true,
+                'editing' => false
             ),
             array(
                 'field' => 'name',
                 'name' => 'Tên danh mục',
-                'type' => 'text',
+                'type' => 'category_name',
                 'filter' => 'like',
-                'sort' => true
+                'sort' => true,
+                'listing' => true,
+                'editing' => true
+            ),
+            array(
+                'field' => 'description',
+                'name' => 'Mô tả danh mục',
+                'type' => 'ckeditor',
+                'listing' => false,
+                'editing' => true
             ),
             array(
                 'field' => 'created_at',
                 'name' => 'Ngày tạo',
                 'type' => 'text',
-                'sort' => true
+                'sort' => true,
+                'listing' => true,
+                'editing' => false
             ),
             array(
                 'field' => 'updated_at',
                 'name' => 'Ngày cập nhật',
                 'type' => 'text',
-                'sort' => true
+                'sort' => true,
+                'listing' => true,
+                'editing' => false
             ),
             array(
                 'field' => 'name',
                 'name' => 'Chi tiết',
                 'type' => 'about',
-                'filter' => 'about'
+                'filter' => 'about',
+                'listing' => true,
+                'editing' => false
             ),
             array(
                 'field' => 'name',
                 'name' => 'Sửa',
                 'type' => 'edit',
-                'filter' => 'edit'
+                'filter' => 'edit',
+                'listing' => true,
+                'editing' => false
             ),
             array(
                 'field' => 'name',
                 'name' => 'Xóa',
                 'type' => 'delete',
-                'filter' => 'delete'
+                'filter' => 'delete',
+                'listing' => true,
+                'editing' => false
             )
         );
         return array_merge($listingconfigs);

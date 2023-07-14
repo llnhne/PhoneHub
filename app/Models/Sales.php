@@ -10,7 +10,8 @@ class Sales extends Base
 {
     use HasFactory;
     public $title = 'Quản Lý Khuyến Mại';
-    public function listingConfigs()
+    public $titlecreate = 'Thêm Mới - Khuyến Mại';
+    public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
         $listingconfigs = array(
@@ -19,57 +20,81 @@ class Sales extends Base
                 'name' => 'ID',
                 'type' => 'text',
                 'filter' => 'equal',
-                'sort' => true
+                'sort' => true,
+                'listing' => true,
+                'editing' => false
             ),
             array(
                 'field' => 'name',
                 'name' => 'Tên khuyến mãi',
                 'type' => 'text',
                 'filter' => 'like',
-                'sort' => true
+                'sort' => true,
+                'listing' => true,
+                'editing' => true
             ),
             array(
                 'field' => 'price',
                 'name' => 'Giá gốc',
                 'type' => 'number',
-                'filter' => 'between',
-                'sort' => true
+                'sort' => true,
+                'listing' => true,
+                'editing' => true
             ),
             array(
                 'field' => 'price_sales',
                 'name' => 'Giá giảm',
-                'type' => 'number',
-                'sort' => true
+                'type' => 'price_sales',
+                'sort' => true,
+                'listing' => true,
+                'editing' => true
+            ),
+            array(
+                'field' => 'products_id',
+                'name' => 'Mã loại sản phẩm',
+                'type' => 'products_id',
+                'listing' => false,
+                'editing' => true
             ),
             array(
                 'field' => 'created_at',
                 'name' => 'Ngày tạo',
                 'type' => 'text',
-                'sort' => true
+                'sort' => true,
+                'listing' => true,
+                'editing' => false
             ),
             array(
                 'field' => 'updated_at',
                 'name' => 'Ngày cập nhật',
                 'type' => 'text',
-                'sort' => true
+                'sort' => true,
+                'listing' => true,
+                'editing' => false
             ),
             array(
                 'field' => 'name',
                 'name' => 'Chi tiết',
                 'type' => 'about',
-                'filter' => 'about'
+                'filter' => 'about',
+                'listing' => true,
+                'editing' => false
             ),
             array(
                 'field' => 'name',
                 'name' => 'Sửa',
                 'type' => 'edit',
-                'filter' => 'edit'
+                'filter' => 'edit',
+                'listing' => true,
+                'editing' => false
             ),
             array(
                 'field' => 'name',
                 'name' => 'Xóa',
                 'type' => 'delete',
-                'filter' => 'delete'
+                'filter' => 'delete',
+                'listing' => true,
+                'editing' => false
             )
         );
         return array_merge($listingconfigs);

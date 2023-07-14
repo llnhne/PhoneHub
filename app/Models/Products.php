@@ -10,7 +10,7 @@ class Products extends Base
 {
     use HasFactory;
     public $title = 'Quản Lý Sản Phẩm';
-    public $titlecreate = "Thêm Mới - Sản Phẩm";
+    public $titlecreate = 'Thêm Mới - Sản Phẩm';
     public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();

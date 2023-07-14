@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <div>
-                        <h4 class="header-title mb-3">{{ $title }}</h4>
+                        <h4 class="header-title mb-3" style="font-size: large; font-weight:600;">{{ $title }}</h4>
                     </div>
                 </div>
             </div>
@@ -122,6 +122,36 @@
                                                     </td>
                                                 @break
 
+                                                @case('category_name')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
+                                                @case('name_banner')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
+                                                @case('email')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
+                                                @case('tel')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
+                                                @case('pays_id')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
                                                 @case('image')
                                                     <td class="align-middle"><img height="50"
                                                             onerror="this.src='/assets/images/users/ava.jpg'"
@@ -129,9 +159,21 @@
                                                     </td>
                                                 @break
 
+                                                @case('price_sales')
+                                                    <td class="align-middle">
+                                                        {{ number_format($record[$config['field']], 0, ',', ',') }} đ
+                                                    </td>
+                                                @break
+
                                                 @case('number')
                                                     <td class="align-middle">
-                                                        {{ number_format($record[$config['field']], 0, ',', ',') }}
+                                                        {{ number_format($record[$config['field']], 0, ',', ',') }} đ
+                                                    </td>
+                                                @break
+
+                                                @case('numbersale')
+                                                    <td class="align-middle">
+                                                        {{ number_format($record[$config['field']], 0, ',', ',') }} đ
                                                     </td>
                                                 @break
 
