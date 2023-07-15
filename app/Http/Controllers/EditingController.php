@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brands;
-use App\Models\Categories;
-use App\Models\Products;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +15,9 @@ class EditingController extends Controller
         $model = '\App\Models\\'.ucfirst($modelName);
         $model = new $model;
         $configs = $model->editingConfigs();
-        $brands = Brands::all();
-        $products = Products::all();
-        $categories = Categories::all();
+        $brands = Brand::all();
+        $products = Product::all();
+        $categories = Category::all();
         return view('admin.editing',[
             'user' => $adminUsers,
             'modelName' => $modelName,
@@ -34,9 +34,9 @@ class EditingController extends Controller
         $model = new $model;
         $configs = $model->editingConfigs();
         $arrayValidateFields = [];
-        $brands = Brands::all();
-        $products = Products::all();
-        $categories = Categories::all();
+        $brands = Brand::all();
+        $products = Product::all();
+        $categories = Category::all();
         foreach($configs as $config){
             if(!empty($config['validate'])){
                 $arrayValidateFields[$config['field']] = $config['validate'];
@@ -54,19 +54,16 @@ class EditingController extends Controller
                             $path = $request->file($config['field'])->storeAs(
                                 'public', $name
                             );
-                            // $model->{$config['field']} = '/'.str_replace("public", "storage", $path);
-                            $data[$config['field']] = '/'.str_replace("public", "storage", $path);
+                            $model->{$config['field']} = '/'.str_replace("public", "storage", $path);
                         }
                     break;
                     
                     default:
-                    // $model->{$config['field']} = $request->input($config['field']);
-                    $data[$config['field']] = $request->input($config['field']);
+                    $model->{$config['field']} = $request->input($config['field']);
                     break;
                 }
             }
         }
-        dd($data);exit();
         return view('admin.editing',[
             'success' => $model->save(),
             'user' => $adminUsers,

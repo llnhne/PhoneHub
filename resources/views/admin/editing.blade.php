@@ -7,7 +7,7 @@
                 <div class="">
                     <h4 class="header-title mb-4" style="font-size: large; font-weight:600;">{{ $titlecreate }}</h4>
                     <div class="mb-4">
-                        <form action="{{ route('editing.store', ['model' => 'Products']) }}" class="form-validation"
+                        <form action="{{ route('editing.store', ['model' => $modelName]) }}" class="form-validation"
                             method="post" enctype="multipart/form-data">
                             @csrf
                             @if (!empty($configs))
@@ -50,15 +50,16 @@
                                                 @break
 
                                                 @case('name_banner')
+                                                <?php $field = $config['field']; ?>
                                                     <div class="row">
                                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                                             <div class="form-group ">
                                                                 <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
                                                                 <div class="input-group flex-column">
                                                                     <input type="text" name="{{ $config['field'] }}"
-                                                                        class="form-control @error('name') is-invalid @enderror"
+                                                                        class="form-control @error($field) is-invalid @enderror"
                                                                         placeholder="{{ htmlspecialchars($config['name']) }}">
-                                                                    @error('name')
+                                                                    @error($field)
                                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                                     @enderror
                                                                 </div>
@@ -159,14 +160,16 @@
                                                 @break
 
                                                 @case('image')
-                                                    <div class="form-group ">
-                                                        <label for="file" class="" style="font-size: medium; font-weight:600;">Chọn ảnh sản phẩm</label>
-                                                            <label for="file" class="btn btn-primary">{{ $config['name'] }}</label>
-                                                                <input id="file" type="file" class="filestyle d-none"
-                                                                    data-size="sm" type="file" name="{{ $config['field'] }}"
-                                                                    class="filestyle" data-btnclass="btn-primary"
-                                                                    placeholder="{{ htmlspecialchars($config['name']) }}">
-                                                    </div>
+                                                <?php $field = $config['field']; ?>
+                                                    <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                        <div class="input-group flex-column mb-3">
+                                                            <input type="file" name="{{ $config['field'] }}"
+                                                                class="form-control @error($field) is-invalid @enderror"
+                                                                placeholder="{{ htmlspecialchars($config['name']) }}">
+                                                            @error($field)
+                                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
                                                 @break
 
                                                 @case('brand_id')

@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Base;
 
-class Sales extends Base
+class Bill extends Base
 {
     use HasFactory;
-    public $title = 'Quản Lý Khuyến Mại';
-    public $titlecreate = 'Thêm Mới - Khuyến Mại';
+    public $title = 'Quản Lý Hóa Đơn';
     public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
@@ -22,11 +21,11 @@ class Sales extends Base
                 'filter' => 'equal',
                 'sort' => true,
                 'listing' => true,
-                'editing' => false
+                'editing' => true
             ),
             array(
-                'field' => 'name',
-                'name' => 'Tên khuyến mãi',
+                'field' => 'bill_name',
+                'name' => 'Mã đơn hàng',
                 'type' => 'text',
                 'filter' => 'like',
                 'sort' => true,
@@ -34,33 +33,71 @@ class Sales extends Base
                 'editing' => true
             ),
             array(
-                'field' => 'price',
-                'name' => 'Giá gốc',
+                'field' => 'user_name',
+                'name' => 'Tên khách hàng',
+                'type' => 'text',
+                'sort' => true,
+                'listing' => true,
+                'editing' => true
+            ),
+            array(
+                'field' => 'email',
+                'name' => 'Email khách hàng',
+                'type' => 'email',
+                'sort' => false,
+                'listing' => false,
+                'editing' => true
+            ),
+            array(
+                'field' => 'phone_number',
+                'name' => 'Số điện thoại',
+                'type' => 'tel',
+                'sort' => false,
+                'listing' => false,
+                'editing' => true
+            ),
+            array(
+                'field' => 'address',
+                'name' => 'Địa chỉ',
+                'type' => 'text',
+                'sort' => false,
+                'listing' => false,
+                'editing' => true
+            ),
+            array(
+                'field' => 'sum_price',
+                'name' => 'Tổng tiền',
                 'type' => 'number',
                 'sort' => true,
                 'listing' => true,
                 'editing' => true
             ),
             array(
-                'field' => 'price_sales',
-                'name' => 'Giá giảm',
-                'type' => 'price_sales',
-                'sort' => true,
-                'listing' => true,
+                'field' => 'description',
+                'name' => 'Ghi chú',
+                'type' => 'description',
+                'sort' => false,
+                'listing' => false,
                 'editing' => true
             ),
             array(
-                'field' => 'products_id',
-                'name' => 'Mã loại sản phẩm',
-                'type' => 'products_id',
+                'field' => 'users_id',
+                'name' => 'Mã khách hàng',
+                'type' => 'users_id',
                 'listing' => false,
+                'editing' => true
+            ),
+            array(
+                'field' => 'pays_id',
+                'name' => 'Mã thanh toán',
+                'type' => 'pays_id',
+                'listing' => true,
                 'editing' => true
             ),
             array(
                 'field' => 'created_at',
                 'name' => 'Ngày tạo',
                 'type' => 'text',
-                'sort' => true,
                 'listing' => true,
                 'editing' => false
             ),
@@ -68,7 +105,6 @@ class Sales extends Base
                 'field' => 'updated_at',
                 'name' => 'Ngày cập nhật',
                 'type' => 'text',
-                'sort' => true,
                 'listing' => true,
                 'editing' => false
             ),

@@ -6,23 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Base;
 
-class Categories extends Base
+class Sale extends Base
 {
     use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'description',
-    ];
-
-    public $title = 'Quản Lý Danh Mục';
-    public $titlecreate = 'Thêm Mới - Danh Mục Sản Phẩm';
-    
-    public function products() 
-    {
-        return $this->hasMany(Product::class);
-    }
-
+    public $title = 'Quản Lý Khuyến Mại';
+    public $titlecreate = 'Thêm Mới - Khuyến Mại';
     public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
@@ -38,8 +26,8 @@ class Categories extends Base
             ),
             array(
                 'field' => 'name',
-                'name' => 'Tên danh mục',
-                'type' => 'category_name',
+                'name' => 'Tên khuyến mãi',
+                'type' => 'text',
                 'filter' => 'like',
                 'sort' => true,
                 'listing' => true,
@@ -47,18 +35,34 @@ class Categories extends Base
                 'validate' => 'required|max:100'
             ),
             array(
-                'field' => 'description',
-                'name' => 'Mô tả danh mục',
-                'type' => 'ckeditor',
-                'listing' => false,
+                'field' => 'price',
+                'name' => 'Giá gốc',
+                'type' => 'number',
+                'sort' => true,
+                'listing' => true,
                 'editing' => true,
-                'validate' => 'required|max:1000'
+                'validate' => 'required|min:5|max:12'
+            ),
+            array(
+                'field' => 'price_sales',
+                'name' => 'Giá giảm',
+                'type' => 'price_sales',
+                'sort' => true,
+                'listing' => true,
+                'editing' => true,
+                'validate' => 'required|min:5|max:12'
+            ),
+            array(
+                'field' => 'products_id',
+                'name' => 'Mã loại sản phẩm',
+                'type' => 'products_id',
+                'listing' => false,
+                'editing' => true
             ),
             array(
                 'field' => 'created_at',
                 'name' => 'Ngày tạo',
                 'type' => 'text',
-                'sort' => true,
                 'listing' => true,
                 'editing' => false
             ),
@@ -66,7 +70,6 @@ class Categories extends Base
                 'field' => 'updated_at',
                 'name' => 'Ngày cập nhật',
                 'type' => 'text',
-                'sort' => true,
                 'listing' => true,
                 'editing' => false
             ),

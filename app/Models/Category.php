@@ -4,22 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Base;
 
-class Brands extends Model
+class Category extends Base
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'description',
     ];
 
-    public $title = 'Quản Lý Thương Hiệu';
+    public $title = 'Quản Lý Danh Mục';
+    public $titlecreate = 'Thêm Mới - Danh Mục Sản Phẩm';
     
-    public function products()
+    public function products() 
     {
         return $this->hasMany(Product::class);
     }
-    
+
     public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
@@ -30,30 +33,31 @@ class Brands extends Model
                 'type' => 'text',
                 'filter' => 'equal',
                 'sort' => true,
-                'listing' => false,
+                'listing' => true,
                 'editing' => false
             ),
             array(
                 'field' => 'name',
-                'name' => 'Tên thương hiệu sản phẩm',
-                'type' => 'text',
+                'name' => 'Tên danh mục',
+                'type' => 'category_name',
                 'filter' => 'like',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true
+                'editing' => true,
+                'validate' => 'required|max:100'
             ),
             array(
                 'field' => 'description',
-                'name' => 'Mô tả sản phẩm',
+                'name' => 'Mô tả danh mục',
                 'type' => 'ckeditor',
                 'listing' => false,
-                'editing' => true
+                'editing' => true,
+                'validate' => 'required|max:1000'
             ),
             array(
                 'field' => 'created_at',
                 'name' => 'Ngày tạo',
                 'type' => 'text',
-                'sort' => true,
                 'listing' => true,
                 'editing' => false
             ),
@@ -61,7 +65,6 @@ class Brands extends Model
                 'field' => 'updated_at',
                 'name' => 'Ngày cập nhật',
                 'type' => 'text',
-                'sort' => true,
                 'listing' => true,
                 'editing' => false
             ),

@@ -24,62 +24,62 @@
         </li>
 
         <li>
-            <a href="{{ route('listing.index', ['model'=>'Categories']) }}">
+            <a href="{{ route('listing.index', ['model'=>'Category']) }}">
                 <i class="ti-direction-alt"></i>
                 <span> Quản lý danh mục </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
-                <li><a href="{{ route('listing.index', ['model'=>'Categories']) }}">Danh sách</a></li>
-                <li><a href="{{ route('editing.create', ['model'=>'Categories']) }}">Thêm</a></li>
+                <li><a href="{{ route('listing.index', ['model'=>'Category']) }}">Danh sách</a></li>
+                <li><a href="{{ route('editing.create', ['model'=>'Category']) }}">Thêm</a></li>
             </ul>
         </li>
 
         <li>
-            <a href="{{ route('listing.index', ['model'=>'Products']) }}">
+            <a href="{{ route('listing.index', ['model'=>'Product']) }}">
                 <i class="ti-briefcase"></i>
                 <span> Quản lý điện thoại </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
-                <li><a href="{{ route('listing.index', ['model'=>'Products']) }}">Danh sách</a></li>
-                <li><a href="{{ route('editing.create', ['model'=>'Products']) }}">Thêm</a></li>
+                <li><a href="{{ route('listing.index', ['model'=>'Product']) }}">Danh sách</a></li>
+                <li><a href="{{ route('editing.create', ['model'=>'Product']) }}">Thêm</a></li>
             </ul>
         </li>
 
         <li>
-            <a href="{{ route('listing.index', ['model'=>'Sales']) }}">
+            <a href="{{ route('listing.index', ['model'=>'Sale']) }}">
                 <i class="ti-ticket"></i>
                 <span> Quản lý khuyến mãi </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
-                <li><a href="{{ route('listing.index', ['model'=>'Sales']) }}">Danh sách</a></li>
-                <li><a href="{{ route('editing.create', ['model'=>'Sales']) }}">Thêm</a></li>
+                <li><a href="{{ route('listing.index', ['model'=>'Sale']) }}">Danh sách</a></li>
+                <li><a href="{{ route('editing.create', ['model'=>'Sale']) }}">Thêm</a></li>
             </ul>
         </li>
 
         <li>
-            <a href="{{ route('listing.index', ['model'=>'Banners']) }}">
+            <a href="{{ route('listing.index', ['model'=>'Banner']) }}">
                 <i class="ti-layers-alt"></i>
                 <span> Quản lý banner </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
-                <li><a href="{{ route('listing.index', ['model'=>'Banners']) }}">Danh sách</a></li>
-                <li><a href="{{ route('editing.create', ['model'=>'Banners']) }}">Thêm</a></li>
+                <li><a href="{{ route('listing.index', ['model'=>'Banner']) }}">Danh sách</a></li>
+                <li><a href="{{ route('editing.create', ['model'=>'Banner']) }}">Thêm</a></li>
                 
             </ul>
         </li>
 
         <li>
-            <a href="{{ route('listing.index', ['model'=>'Bills']) }}">
+            <a href="{{ route('listing.index', ['model'=>'Bill']) }}">
                 <i class="ti-printer"></i>
                 <span> Quản lý hóa đơn </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
-                <li><a href="{{ route('listing.index', ['model'=>'Bills']) }}">Danh sách</a></li>
+                <li><a href="{{ route('listing.index', ['model'=>'Bill']) }}">Danh sách</a></li>
             </ul>
         </li>
 

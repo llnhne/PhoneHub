@@ -5,18 +5,19 @@
         <div class="container-fluid">
 
             <!-- start  -->
-            <div class="row">
-                <div class="col-12">
-                    <div>
-                        <h4 class="header-title mb-3" style="font-size: large; font-weight:600;">{{ $title }}</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="mb-2" style="font-size: large; font-weight:600;">{{ $title }}</h4>
+                            <button type="button" class="btn btn-primary"><a class="text-white" href="{{ route('editing.store', ['model' => $modelName]) }}">Thêm Mới</a></button>
+                        </div><hr>
                     </div>
                 </div>
-            </div>
 
             <!-- row -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="mt-3">
+                    <div class="mt-2">
                         <div class="row mb-3 ">
                             <div class="col-md-4 col-sm-12">
                                 <div class="btn-group">
