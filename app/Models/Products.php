@@ -9,8 +9,25 @@ use App\Models\Base;
 class Products extends Base
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'price',
+        'image',
+        'description',
+        'brand_id',
+        'category_id'
+    ];
     public $title = 'Quản Lý Sản Phẩm';
     public $titlecreate = 'Thêm Mới - Sản Phẩm';
+
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
     public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
@@ -31,7 +48,8 @@ class Products extends Base
                 'filter' => 'like',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true
+                'editing' => true,
+                'validate' => 'required|max:100'
             ),
             array(
                 'field' => 'price',
@@ -40,7 +58,8 @@ class Products extends Base
                 'filter' => 'between',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true
+                'editing' => true,
+                'validate' => 'required|min:5|max:12'
             ),
             array(
                 'field' => 'image',

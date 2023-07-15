@@ -155,7 +155,7 @@
                                                 @case('image')
                                                     <td class="align-middle"><img height="50"
                                                             onerror="this.src='/assets/images/users/ava.jpg'"
-                                                            src="{{ $record[$config['field']] }}" alt="" srcset="">
+                                                            src="{{ $record[$config['field']] }}" alt="{{ $record[$config['field']] }}">
                                                     </td>
                                                 @break
 

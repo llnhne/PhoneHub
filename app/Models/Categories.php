@@ -9,8 +9,20 @@ use App\Models\Base;
 class Categories extends Base
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+
     public $title = 'Quản Lý Danh Mục';
     public $titlecreate = 'Thêm Mới - Danh Mục Sản Phẩm';
+    
+    public function products() 
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
@@ -31,14 +43,16 @@ class Categories extends Base
                 'filter' => 'like',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true
+                'editing' => true,
+                'validate' => 'required|max:100'
             ),
             array(
                 'field' => 'description',
                 'name' => 'Mô tả danh mục',
                 'type' => 'ckeditor',
                 'listing' => false,
-                'editing' => true
+                'editing' => true,
+                'validate' => 'required|max:1000'
             ),
             array(
                 'field' => 'created_at',

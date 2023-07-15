@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->text('description')->nullable();
-            $table->unsignedInteger('products_id');
+            $table->text('description');
             $table->timestamps();
         });
     }

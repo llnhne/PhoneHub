@@ -8,7 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Brands extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+
     public $title = 'Quản Lý Thương Hiệu';
+    
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
     
     public function configs()
     {
@@ -25,41 +35,11 @@ class Brands extends Model
             ),
             array(
                 'field' => 'name',
-                'name' => 'Tên sản phẩm',
+                'name' => 'Tên thương hiệu sản phẩm',
                 'type' => 'text',
                 'filter' => 'like',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true
-            ),
-            array(
-                'field' => 'price',
-                'name' => 'Giá sản phẩm',
-                'type' => 'number',
-                'filter' => 'between',
-                'sort' => true,
-                'listing' => true,
-                'editing' => true
-            ),
-            array(
-                'field' => 'image',
-                'name' => 'Ảnh sản phẩm',
-                'type' => 'image',
-                'listing' => true,
-                'editing' => true
-            ),
-            array(
-                'field' => 'brand_id',
-                'name' => 'Loại thương hiệu sản phẩm',
-                'type' => 'brand_id',
-                'listing' => false,
-                'editing' => true
-            ),
-            array(
-                'field' => 'category_id',
-                'name' => 'Loại danh mục sản phẩm',
-                'type' => 'category_id',
-                'listing' => false,
                 'editing' => true
             ),
             array(
