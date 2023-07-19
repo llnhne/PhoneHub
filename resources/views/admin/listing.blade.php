@@ -83,24 +83,25 @@
                                                 @if ($orderBy['sort'] == 'desc')
                                                     <th class="align-middle">
                                                         {{ $config['name'] }}
-                                                        <a class=""
-                                                            href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'] . '_asc']) }}"><i
-                                                                class="ti-arrow-down"></i></a>
+                                                        <a class="" href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'] . '_asc']) }}">
+                                                            <i class="ti-arrow-down"></i>
+                                                        </a>
                                                     </th>
                                                 @else
                                                     <th class="align-middle">
                                                         {{ $config['name'] }}
-                                                        <a class=""
-                                                            href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'] . '_desc']) }}"><i
-                                                                class="ti-arrow-up"></i></a>
+                                                        <a class="" href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'] . '_desc']) }}">
+                                                            <i class="ti-arrow-up"></i>
+                                                        </a>
                                                     </th>
                                                 @endif
                                             @else
                                                 <th class="align-middle">
                                                     {{ $config['name'] }}
                                                     <a class=""
-                                                        href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'] . '_desc']) }}"><i
-                                                            class="ti-exchange-vertical"></i></a>
+                                                        href="{{ route('listing.index', ['model' => $modelName, 'sort' => $config['field'] . '_desc']) }}">
+                                                        <i class="ti-exchange-vertical"></i>
+                                                        </a>
                                                 </th>
                                             @endif
                                         @else
@@ -156,7 +157,7 @@
                                                 @case('image')
                                                     <td class="align-middle"><img height="50"
                                                             onerror="this.src='/assets/images/users/ava.jpg'"
-                                                            src="{{ $record[$config['field']] }}" alt="{{ $record[$config['field']] }}">
+                                                            src="" alt="{{ $record[$config['field']] }}">
                                                     </td>
                                                 @break
 
@@ -180,19 +181,30 @@
 
                                                 @case('about')
                                                     <td class="align-middle">
-                                                        <a href="#"><i class="ti-info-alt"></i></a>
+                                                        <a href="#">
+                                                            <i class="ti-info-alt"></i>
+                                                        </a>
 
                                                     </td>
                                                 @break
 
                                                 @case('edit')
                                                     <td class="align-middle">
-                                                        <a href="#"><i class="ti-marker-alt mx-2"></i></a>
+                                                        <a href="#">
+                                                            <i class="ti-marker-alt mx-2"></i>
+                                                        </a>
                                                     </td>
                                                 @break
 
                                                 @case('delete')
-                                                    <td class="align-middle"><a href="#"><i class="ti-trash"></i></a></td>
+                                                    <form method="POST" action="{{ route('listing.destroy', ['model' => $modelName, $record[$config['field']] ]) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <td class="align-middle"><a href="{{ route('listing.destroy', ['model' => $modelName, $record[$config['field']] ]) }}">
+                                                            <i class="ti-trash"></i></a>
+                                                            
+                                                        </td>
+                                                        </form>
                                                 @break
 
                                                 @default

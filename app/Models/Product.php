@@ -105,7 +105,7 @@ class Product extends Base
                 'editing' => false
             ),
             array(
-                'field' => 'name',
+                'field' => 'id',
                 'name' => 'Chi tiết',
                 'type' => 'about',
                 'filter' => 'about',
@@ -113,7 +113,7 @@ class Product extends Base
                 'editing' => false
             ),
             array(
-                'field' => 'name',
+                'field' => 'id',
                 'name' => 'Sửa',
                 'type' => 'edit',
                 'filter' => 'edit',
@@ -121,7 +121,7 @@ class Product extends Base
                 'editing' => false
             ),
             array(
-                'field' => 'name',
+                'field' => 'id',
                 'name' => 'Xóa',
                 'type' => 'delete',
                 'filter' => 'delete',

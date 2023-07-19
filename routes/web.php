@@ -64,6 +64,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/listing/{model}', [ListingController::class, 'index'])->name('listing.index');
     Route::get('/admin/editing/{model}', [EditingController::class, 'create'])->name('editing.create');
     Route::post('/admin/editing/{model}', [EditingController::class, 'store'])->name('editing.store');
+    Route::post('/admin/listing/{model}/{id}', [ListingController::class, 'destroy'])->name('listing.destroy');
 });
 
 
