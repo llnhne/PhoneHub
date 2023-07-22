@@ -10,11 +10,21 @@ class Base extends Model
 {
     use HasFactory;
 
+    public function detailConfigs(){
+        return $this->getConfigs('detail');
+    }
+
     public function listingConfigs(){
         return $this->getConfigs('listing');
     }
     public function editingConfigs(){
         return $this->getConfigs('editing');
+    }
+    public function updatingConfigs(){
+        return $this->getConfigs('updating');
+    }
+    public function archiveConfigs(){
+        return $this->getConfigs('archive');
     }
     public function getConfigs($interface){
         $configs = $this->configs();
@@ -27,6 +37,13 @@ class Base extends Model
         return $result;
     }
 
+    // public function getDetails($id,$modelName){
+        
+    //     $model = '\App\Models\\'.ucfirst($modelName);
+    //     $items = $model::find($id);
+    //     return self::items($items['field']);
+        
+    // }
     public function getRecords($conditions, $orderBy)
     {
         $per_page = 5;

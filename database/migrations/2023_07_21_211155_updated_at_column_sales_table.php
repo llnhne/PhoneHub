@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('colors', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->unsignedInteger('products_id');
-            $table->timestamps();
+        Schema::table('sales', function (Blueprint $table) {
+            $table->softDeletes()->after('updated_at');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('colors');
+        Schema::table('sales', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

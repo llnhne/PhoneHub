@@ -14,10 +14,11 @@
     <link href="{{URL::asset('assets\css\bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
     <link href="{{URL::asset('assets\css\icons.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{URL::asset('assets\css\app.min.css')}}" rel="stylesheet" type="text/css" id="app-stylesheet">
-
+    
 </head>
 <style>
 
+    
     #container {
         width: 1000px;
         margin: 20px auto;

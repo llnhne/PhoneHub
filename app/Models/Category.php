@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Base;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Base
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -17,6 +19,9 @@ class Category extends Base
 
     public $title = 'Quản Lý Danh Mục';
     public $titlecreate = 'Thêm Mới - Danh Mục Sản Phẩm';
+    public $titleupdate = 'Cập Nhật - Danh Mục Sản Phẩm';
+    public $titledetail = 'Chi Tiết - Danh Mục Sản Phẩm';
+    public $titlearchive = 'Đã Xóa Gần Đây - Quản Lý Danh Mục';
     
     public function products() 
     {
@@ -34,7 +39,10 @@ class Category extends Base
                 'filter' => 'equal',
                 'sort' => true,
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => true,
+                'updating' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'name',
@@ -44,7 +52,10 @@ class Category extends Base
                 'sort' => true,
                 'listing' => true,
                 'editing' => true,
-                'validate' => 'required|max:100'
+                'detail' => true,
+                'validate' => 'required|max:100',
+                'updating' => true,
+                'archive' => true
             ),
             array(
                 'field' => 'description',
@@ -52,21 +63,30 @@ class Category extends Base
                 'type' => 'ckeditor',
                 'listing' => false,
                 'editing' => true,
-                'validate' => 'required|max:1000'
+                'detail' => true,
+                'validate' => 'required|max:1000',
+                'updating' => true,
+                'archive' => false
             ),
             array(
                 'field' => 'created_at',
                 'name' => 'Ngày tạo',
-                'type' => 'text',
+                'type' => 'created_at',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => true,
+                'updating' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'updated_at',
                 'name' => 'Ngày cập nhật',
-                'type' => 'text',
+                'type' => 'updated_at',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => true,
+                'updating' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'id',
@@ -74,7 +94,10 @@ class Category extends Base
                 'type' => 'about',
                 'filter' => 'about',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => false,
+                'updating' => false,
+                'archive' => false
             ),
             array(
                 'field' => 'id',
@@ -82,7 +105,10 @@ class Category extends Base
                 'type' => 'edit',
                 'filter' => 'edit',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => false,
+                'updating' => false,
+                'archive' => false
             ),
             array(
                 'field' => 'id',
@@ -90,7 +116,20 @@ class Category extends Base
                 'type' => 'delete',
                 'filter' => 'delete',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => false,
+                'updating' => false,
+                'archive' => false
+            ),
+            array(
+                'field' => 'back',
+                'name' => 'Quay lại danh sách Danh Mục',
+                'type' => 'back',
+                'listing' => false,
+                'editing' => false,
+                'detail' => true,
+                'updating' => false,
+                'archive' => false
             )
         );
         return array_merge($listingconfigs);

@@ -1,6 +1,6 @@
 <div class="user-box">
     <div class="float-left">
-        <img src="{{ URL::asset('assets\images\users\ava.jpg') }}" alt=""
+        <img src="{{ $user->image }}" alt="{{ $user->image }}"
             class="avatar-md rounded-circle">
     </div>
     <div class="user-info">
@@ -91,7 +91,7 @@
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{ route('listing.index', ['model'=>'Admin']) }}">Admins</a></li>
-                <li><a href="{{ route('listing.index', ['model'=>'User']) }}">Users</a></li>
+                
             </ul>
         </li>
 

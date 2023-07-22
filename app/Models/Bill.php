@@ -5,11 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Base;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Bill extends Base
 {
     use HasFactory;
+    use SoftDeletes;
+
     public $title = 'Quản Lý Hóa Đơn';
+    public $titleupdate = 'Cập Nhật - Hóa Đơn';
+    public $titledetail = 'Chi Tiết - Hóa Đơn';
+    public $titlearchive = 'Đã Xóa Gần Đây - Quản Lý Hóa Đơn';
     public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
@@ -21,24 +27,33 @@ class Bill extends Base
                 'filter' => 'equal',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true
+                'editing' => true,
+                'detail' => true,
+                'updating' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'bill_name',
                 'name' => 'Mã đơn hàng',
-                'type' => 'text',
+                'type' => 'bill_name',
                 'filter' => 'like',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true
+                'editing' => true,
+                'detail' => true,
+                'updating' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'user_name',
                 'name' => 'Tên khách hàng',
-                'type' => 'text',
+                'type' => 'user_name',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true
+                'editing' => true,
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
             ),
             array(
                 'field' => 'email',
@@ -46,7 +61,10 @@ class Bill extends Base
                 'type' => 'email',
                 'sort' => false,
                 'listing' => false,
-                'editing' => true
+                'editing' => true,
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
             ),
             array(
                 'field' => 'phone_number',
@@ -54,23 +72,32 @@ class Bill extends Base
                 'type' => 'tel',
                 'sort' => false,
                 'listing' => false,
-                'editing' => true
+                'editing' => true,
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
             ),
             array(
                 'field' => 'address',
                 'name' => 'Địa chỉ',
-                'type' => 'text',
+                'type' => 'address',
                 'sort' => false,
                 'listing' => false,
-                'editing' => true
+                'editing' => true,
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
             ),
             array(
                 'field' => 'sum_price',
                 'name' => 'Tổng tiền',
-                'type' => 'number',
+                'type' => 'sum_price',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true
+                'editing' => true,
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
             ),
             array(
                 'field' => 'description',
@@ -78,35 +105,50 @@ class Bill extends Base
                 'type' => 'description',
                 'sort' => false,
                 'listing' => false,
-                'editing' => true
+                'editing' => true,
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
             ),
             array(
                 'field' => 'users_id',
                 'name' => 'Mã khách hàng',
                 'type' => 'users_id',
                 'listing' => false,
-                'editing' => true
+                'editing' => true,
+                'detail' => true,
+                'updating' => false,
+                'archive' => false
             ),
             array(
                 'field' => 'pays_id',
                 'name' => 'Mã thanh toán',
                 'type' => 'pays_id',
                 'listing' => true,
-                'editing' => true
+                'editing' => true,
+                'detail' => true,
+                'updating' => false,
+                'archive' => false
             ),
             array(
                 'field' => 'created_at',
                 'name' => 'Ngày tạo',
-                'type' => 'text',
+                'type' => 'created_at',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => true,
+                'updating' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'updated_at',
                 'name' => 'Ngày cập nhật',
-                'type' => 'text',
+                'type' => 'updated_at',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => true,
+                'updating' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'id',
@@ -114,7 +156,10 @@ class Bill extends Base
                 'type' => 'about',
                 'filter' => 'about',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => false,
+                'updating' => false,
+                'archive' => false
             ),
             array(
                 'field' => 'id',
@@ -122,7 +167,10 @@ class Bill extends Base
                 'type' => 'edit',
                 'filter' => 'edit',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => false,
+                'updating' => false,
+                'archive' => false
             ),
             array(
                 'field' => 'id',
@@ -130,7 +178,20 @@ class Bill extends Base
                 'type' => 'delete',
                 'filter' => 'delete',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => false,
+                'updating' => false,
+                'archive' => false
+            ),
+            array(
+                'field' => 'back',
+                'name' => 'Quay lại danh sách Hóa Đơn',
+                'type' => 'back',
+                'listing' => false,
+                'editing' => false,
+                'detail' => true,
+                'updating' => false,
+                'archive' => false
             )
         );
         return array_merge($listingconfigs);

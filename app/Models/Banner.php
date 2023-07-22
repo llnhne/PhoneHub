@@ -5,12 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Base;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Banner extends Base
 {
     use HasFactory;
+    use SoftDeletes;
+
     public $title = 'Quản Lý Banner';
     public $titlecreate = 'Thêm Mới - Banner Marketing';
+    public $titleupdate = 'Cập Nhật - Banner Marketing';
+    public $titledetail = 'Chi Tiết - Banner Marketing';
+    public $titlearchive = 'Đã Xóa Gần Đây - Quản Lý Banner Marketing';
     public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
@@ -22,7 +28,10 @@ class Banner extends Base
                 'filter' => 'equal',
                 'sort' => true,
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => true,
+                'updating' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'name',
@@ -32,7 +41,10 @@ class Banner extends Base
                 'sort' => true,
                 'listing' => true,
                 'editing' => true,
-                'validate' => 'required|max:100'
+                'validate' => 'required|max:100',
+                'detail' => true,
+                'updating' => true,
+                'archive' => true
             ),
             array(
                 'field' => 'image',
@@ -40,21 +52,30 @@ class Banner extends Base
                 'type' => 'image',
                 'listing' => true,
                 'editing' => true,
-                'validate' => 'required|mimes:jpeg,png,jpg,gif'
+                'validate' => 'required|mimes:jpeg,png,jpg,gif',
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
             ),
             array(
                 'field' => 'created_at',
                 'name' => 'Ngày tạo',
-                'type' => 'text',
+                'type' => 'created_at',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => true,
+                'updating' => true,
+                'archive' => true
             ),
             array(
                 'field' => 'updated_at',
                 'name' => 'Ngày cập nhật',
-                'type' => 'text',
+                'type' => 'updated_at',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => true,
+                'updating' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'id',
@@ -62,7 +83,10 @@ class Banner extends Base
                 'type' => 'about',
                 'filter' => 'about',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => false,
+                'updating' => false,
+                'archive' => false
             ),
             array(
                 'field' => 'id',
@@ -70,7 +94,10 @@ class Banner extends Base
                 'type' => 'edit',
                 'filter' => 'edit',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => false,
+                'updating' => false,
+                'archive' => false
             ),
             array(
                 'field' => 'id',
@@ -78,7 +105,20 @@ class Banner extends Base
                 'type' => 'delete',
                 'filter' => 'delete',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'detail' => false,
+                'updating' => false,
+                'archive' => false
+            ),
+            array(
+                'field' => 'back',
+                'name' => 'Quay lại danh sách Banner',
+                'type' => 'back',
+                'listing' => false,
+                'editing' => false,
+                'detail' => true,
+                'updating' => false,
+                'archive' => false
             )
         );
         return array_merge($listingconfigs);

@@ -31,7 +31,8 @@ class Brand extends Model
                 'filter' => 'equal',
                 'sort' => true,
                 'listing' => false,
-                'editing' => false
+                'editing' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'name',
@@ -40,28 +41,32 @@ class Brand extends Model
                 'filter' => 'like',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true
+                'editing' => true,
+                'archive' => true
             ),
             array(
                 'field' => 'description',
                 'name' => 'Mô tả sản phẩm',
                 'type' => 'ckeditor',
                 'listing' => false,
-                'editing' => true
+                'editing' => true,
+                'archive' => false
             ),
             array(
                 'field' => 'created_at',
                 'name' => 'Ngày tạo',
                 'type' => 'text',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'updated_at',
                 'name' => 'Ngày cập nhật',
                 'type' => 'text',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'archive' => true
             ),
             array(
                 'field' => 'name',
@@ -69,7 +74,8 @@ class Brand extends Model
                 'type' => 'about',
                 'filter' => 'about',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'archive' => false
             ),
             array(
                 'field' => 'name',
@@ -77,7 +83,8 @@ class Brand extends Model
                 'type' => 'edit',
                 'filter' => 'edit',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'archive' => false
             ),
             array(
                 'field' => 'name',
@@ -85,7 +92,8 @@ class Brand extends Model
                 'type' => 'delete',
                 'filter' => 'delete',
                 'listing' => true,
-                'editing' => false
+                'editing' => false,
+                'archive' => false
             )
         );
         return array_merge($listingconfigs);

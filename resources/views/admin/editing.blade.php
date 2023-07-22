@@ -17,7 +17,7 @@
                                 @if (!empty($configs))
                                     @foreach ($configs as $config)
                                         @switch($config['type'])
-                                            @case('text')
+                                            @case('product_name')
                                                 <?php $field = $config['field']; ?>
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -108,6 +108,24 @@
                                                                 </div>
                                                             </div>
                                                         @break
+                                                        @case('name_sale')
+                                                        <?php $field = $config['field']; ?>
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                    <div class="form-group ">
+                                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                        <div class="input-group flex-column">
+                                                                            <input type="text" name="{{ $config['field'] }}"
+                                                                                class="form-control @error($field) is-invalid @enderror"
+                                                                                placeholder="{{ htmlspecialchars($config['name']) }}">
+                                                                            @error($field)
+                                                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                        @break
 
                                                         @case('price_sales')
                                                         <?php $field = $config['field']; ?>
@@ -125,6 +143,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            
                                                         @break
 
                                                         @case('products_id')
@@ -166,14 +185,14 @@
                                                     @case('image')
                                                     <?php $field = $config['field']; ?>
                                                         <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
-                                                            <div class="input-group flex-column mb-3">
-                                                                <input type="file" name="{{ $config['field'] }}"
-                                                                    class="form-control @error($field) is-invalid @enderror"
-                                                                    placeholder="{{ htmlspecialchars($config['name']) }}">
+                                                            
+                                                            <div class="mb-3">
+                                                            
+                                                                <input class="form-control @error($field) is-invalid @enderror" type="file" id="formFile" name="{{ $config['field'] }}">
                                                                 @error($field)
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror
-                                                            </div>
+                                                              </div>
                                                     @break
 
                                                     @case('brand_id')
@@ -203,6 +222,119 @@
                                                                             <select class="select2 form-control @error('category_id') is-invalid @enderror" data-toggle="select2" name="{{ $config['field'] }}">
                                                                                 @foreach ($categories as $category)
                                                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @break
+
+                                                    @case('color_id')
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-group">
+                                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                        <div class="input-group">
+                                                                            <select class="select2 form-control @error('category_id') is-invalid @enderror" data-toggle="select2" name="{{ $config['field'] }}">
+                                                                                @foreach ($colors as $color)
+                                                                                    <option value="{{ $color->id }}">{{ $color->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                    @break
+
+                                                    @case('number_name')
+                                                       
+                                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                    <div class="input-group flex-column">
+                                                                        <input type="number" name="{{ $config['field'] }}"
+                                                                            class="form-control @error($field) is-invalid @enderror"
+                                                                            placeholder="{{ htmlspecialchars($config['name']) }}">
+                                                                        @error($config['field'])
+                                                                            <div class="alert alert-danger">{{ $message }}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @break
+
+                                                    @case('ram_id')
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-group">
+                                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                        <div class="input-group">
+                                                                            <select class="select2 form-control @error('category_id') is-invalid @enderror" data-toggle="select2" name="{{ $config['field'] }}">
+                                                                                @foreach ($rams as $ram)
+                                                                                    <option value="{{ $ram->id }}">{{ $ram->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                    @break
+
+                                                    @case('rom_id')
+                                                       
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-group">
+                                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                        <div class="input-group">
+                                                                            <select class="select2 form-control @error('category_id') is-invalid @enderror" data-toggle="select2" name="{{ $config['field'] }}">
+                                                                                @foreach ($roms as $rom)
+                                                                                    <option value="{{ $rom->id }}">{{ $rom->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @break
+
+                                                    @case('chip_id')
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-group">
+                                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                        <div class="input-group">
+                                                                            <select class="select2 form-control @error('category_id') is-invalid @enderror" data-toggle="select2" name="{{ $config['field'] }}">
+                                                                                @foreach ($chips as $chip)
+                                                                                    <option value="{{ $chip->id }}">{{ $chip->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                    @break
+
+                                                    @case('screen_id')
+                                                       
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-group">
+                                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                        <div class="input-group">
+                                                                            <select class="select2 form-control @error('category_id') is-invalid @enderror" data-toggle="select2" name="{{ $config['field'] }}">
+                                                                                @foreach ($screens as $screen)
+                                                                                    <option value="{{ $screen->id }}">{{ $screen->name }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>

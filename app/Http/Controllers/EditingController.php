@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Chip;
+use App\Models\Color;
 use App\Models\Product;
+use App\Models\Ram;
+use App\Models\Rom;
+use App\Models\Screen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +23,11 @@ class EditingController extends Controller
         $brands = Brand::all();
         $products = Product::all();
         $categories = Category::all();
+        $colors = Color::all();
+        $rams = Ram::all();
+        $roms = Rom::all();
+        $chips = Chip::all();
+        $screens = Screen::all();
         return view('admin.editing',[
             'user' => $adminUsers,
             'modelName' => $modelName,
@@ -25,7 +35,12 @@ class EditingController extends Controller
             'configs' => $configs,
             'brands' => $brands,
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'colors' => $colors,
+            'rams' => $rams,
+            'roms' => $roms,
+            'chips' => $chips,
+            'screens' => $screens
         ]);
     }
     public function store(Request $request, $modelName){
@@ -37,6 +52,11 @@ class EditingController extends Controller
         $brands = Brand::all();
         $products = Product::all();
         $categories = Category::all();
+        $colors = Color::all();
+        $rams = Ram::all();
+        $roms = Rom::all();
+        $chips = Chip::all();
+        $screens = Screen::all();
         foreach($configs as $config){
             if(!empty($config['validate'])){
                 $arrayValidateFields[$config['field']] = $config['validate'];
@@ -52,9 +72,9 @@ class EditingController extends Controller
                         if($request->hasFile($config['field'])){
                             $name = $request->file($config['field'])->getClientOriginalName();
                             $path = $request->file($config['field'])->storeAs(
-                                'public', $name
+                                'public/images', $name
                             );
-                            $model->{$config['field']} = '/'.str_replace("public", "storage", $path);
+                            $model->{$config['field']} = '/' . str_replace("public/images", "storage/images", $path);
                         }
                     break;
                     
@@ -72,7 +92,12 @@ class EditingController extends Controller
             'configs' => $configs,
             'brands' => $brands,
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'colors' => $colors,
+            'rams' => $rams,
+            'roms' => $roms,
+            'chips' => $chips,
+            'screens' => $screens
         ]);
         
     }

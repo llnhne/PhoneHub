@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Chip;
+use App\Models\Ram;
+use App\Models\Rom;
+use App\Models\Screen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ListingController extends Controller
 {
-    public function index(Request $request, $modelName){
+    public function index(Request $request, $modelName)
+    {
         $adminUsers = Auth::guard('admin')->user();
         $model = '\App\Models\\'.ucfirst($modelName);
         $model = new $model;
@@ -36,19 +43,63 @@ class ListingController extends Controller
             'orderBy' => $orderBy
         ]);
     }
-    public function destroy($modelName,Model $model)
+
+    public function show($modelName, $id)
     {
-       
+        $adminUsers = Auth::guard('admin')->user();
+        $model = '\App\Models\\'.ucfirst($modelName);
+        $items = $model::find($id);
+        $brand = Brand::all();
+        $category = Category::all();
+        $color = Ram::all();
+        $rom = Rom::all();
+        $chip = Chip::all();
+        $screen = Screen::all();
+        return view('admin.detail', [
+            'user' => $adminUsers,
+            'titledetail' => $items->titledetail,
+            'configs' => $items->detailConfigs(),
+            'modelName' => $modelName,
+            'items' => $items,
+            'brand' => $items->brand,
+            'category' => $items->category,
+            'color' => $items->color,
+            'ram' => $items->rom,
+            'rom' => $items->ram,
+            'chip' => $items->chip,
+            'screen' => $items->screen
+        ]);
+    }
+
+    public function archive($modelName)
+    {
         $adminUsers = Auth::guard('admin')->user();
         $model = '\App\Models\\'.ucfirst($modelName);
         $model = new $model;
-        $configs = $model->listingConfigs();
-        $model->delete();
-        return view('admin.listing', [
+        $items = $model::onlyTrashed()->get();
+
+        return view('admin.archive',[
             'user' => $adminUsers,
-            'configs' => $configs,
             'modelName' => $modelName,
-            'model' => $model
+            'titlearchive' => $model->titlearchive,
+            'items' => $items
         ]);
     }
+
+    public function delete($modelName, $modelId)
+    {
+        $adminUsers = Auth::guard('admin')->user();
+        $model = '\App\Models\\'.ucfirst($modelName);
+        $model = new $model;
+        
+        // if($modelId->trashed()){
+        //     $modelId->forceDelete();
+        //     return Redirect::back()->with('success', 'Delete successfully');
+        // }
+
+        
+        $model::find($modelId)->delete();
+        return Redirect::back()->with('success', 'Delete successfully');
+    }
+
 }

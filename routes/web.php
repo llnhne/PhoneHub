@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EditingController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\UpdatingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -64,7 +65,11 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/listing/{model}', [ListingController::class, 'index'])->name('listing.index');
     Route::get('/admin/editing/{model}', [EditingController::class, 'create'])->name('editing.create');
     Route::post('/admin/editing/{model}', [EditingController::class, 'store'])->name('editing.store');
-    Route::post('/admin/listing/{model}/{id}', [ListingController::class, 'destroy'])->name('listing.destroy');
+    Route::get('/admin/updating/{model}/{id}', [UpdatingController::class, 'edit'])->name('updating.edit');
+    Route::put('/admin/updating/{model}/{id}', [UpdatingController::class, 'update'])->name('updating.update');
+    Route::delete('/admin/delete/{model}/{id}', [ListingController::class, 'delete'])->name('listing.delete')->withTrashed();
+    Route::get('/admin/ct/{model}/{id}', [ListingController::class, 'show'])->name('listing.show');
+    Route::get('/admin/archive/{model}', [ListingController::class, 'archive'])->name('listing.archive');
 });
 
 

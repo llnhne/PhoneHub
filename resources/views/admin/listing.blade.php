@@ -5,15 +5,17 @@
         <div class="container-fluid">
 
             <!-- start  -->
+            
+                
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
-                            <h4 class="mb-2" style="font-size: large; font-weight:600;">{{ $title }}</h4>
-                            <button type="button" class="btn btn-primary"><a class="text-white" href="{{ route('editing.store', ['model' => $modelName]) }}">Thêm Mới</a></button>
+                            <h4 class="" style="font-size: large; font-weight:600;">{{ $title }}</h4>
+                            <button type="button" class="btn btn-light"><a href="{{ route('listing.archive', ['model' => $modelName]) }}">Đã xóa gần đây</a></button>
                         </div><hr>
                     </div>
                 </div>
-
+                
             <!-- row -->
             <div class="row">
                 <div class="col-lg-12">
@@ -71,9 +73,18 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @if(session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
 
 
-                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
+                        <table id="datatable-buttons" class="table table-hover table-bordered dt-responsive nowrap"
                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead class="text-center">
                                 <tr>
@@ -124,7 +135,19 @@
                                                     </td>
                                                 @break
 
+                                                @case('name')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
                                                 @case('category_name')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
+                                                @case('product_name')
                                                     <td class="align-middle">
                                                         {{ $record[$config['field']] }}
                                                     </td>
@@ -136,10 +159,43 @@
                                                     </td>
                                                 @break
 
+                                                @case('name_sale')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
+                                                @case('bill_name')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
+                                                @case('user_name')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
+                                                @case('sum_price')
+                                                    <td class="align-middle">
+                                                        {{ number_format($record[$config['field']], 0, ',', ',') }} đ
+                                                    </td>
+                                                @break
+
                                                 @case('email')
                                                     <td class="align-middle">
                                                         {{ $record[$config['field']] }}
                                                     </td>
+                                                @break
+
+                                                @case('password')
+                                                <?php 
+                                                $maskedPassword = '********';
+                                                ?>
+                                                <td class="align-middle">
+                                                    {{ $maskedPassword }}
+                                                </td>
                                                 @break
 
                                                 @case('tel')
@@ -155,11 +211,13 @@
                                                 @break
 
                                                 @case('image')
-                                                    <td class="align-middle"><img height="50"
-                                                            onerror="this.src='/assets/images/users/ava.jpg'"
-                                                            src="" alt="{{ $record[$config['field']] }}">
-                                                    </td>
-                                                @break
+                                                    
+                                                        <td class="align-middle">
+                                                            <img height="50" onerror="this.src='/assets/images/users/ava.jpg'"
+                                                                src="{{ $record[$config['field']] }}" alt="{{ $record[$config['field']] }}">
+                                                        </td>
+                                                   
+                                                    @break
 
                                                 @case('price_sales')
                                                     <td class="align-middle">
@@ -178,10 +236,19 @@
                                                         {{ number_format($record[$config['field']], 0, ',', ',') }} đ
                                                     </td>
                                                 @break
-
+                                                @case('created_at')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+                                                @case('updated_at')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
                                                 @case('about')
                                                     <td class="align-middle">
-                                                        <a href="#">
+                                                        <a href="{{ route('listing.show', ['model' => $modelName, $record[$config['field']] ]) }}">
                                                             <i class="ti-info-alt"></i>
                                                         </a>
 
@@ -190,18 +257,18 @@
 
                                                 @case('edit')
                                                     <td class="align-middle">
-                                                        <a href="#">
+                                                        <a href="{{ route('updating.edit', ['model' => $modelName, $record[$config['field']] ]) }}">
                                                             <i class="ti-marker-alt mx-2"></i>
                                                         </a>
                                                     </td>
                                                 @break
 
                                                 @case('delete')
-                                                    <form method="POST" action="{{ route('listing.destroy', ['model' => $modelName, $record[$config['field']] ]) }}">
+                                                    <form method="POST" action="{{ route('listing.delete', ['model' => $modelName, $record[$config['field']] ]) }}">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <td class="align-middle"><a href="{{ route('listing.destroy', ['model' => $modelName, $record[$config['field']] ]) }}">
-                                                            <i class="ti-trash"></i></a>
+                                                        <td class="align-middle">
+                                                            <button type="submit" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</button>
                                                             
                                                         </td>
                                                         </form>

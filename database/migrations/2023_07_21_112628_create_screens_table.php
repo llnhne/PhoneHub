@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('numbers', function (Blueprint $table) {
+        Schema::create('screens', function (Blueprint $table) {
             $table->id();
-            $table->integer('numbers');
-            $table->unsignedInteger('products_id');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('numbers');
+        Schema::dropIfExists('screens');
     }
 };
