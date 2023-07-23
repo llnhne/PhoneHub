@@ -64,7 +64,6 @@ class EditingController extends Controller
         }
         // dd($arrayValidateFields);exit();
         $validated = $request->validate($arrayValidateFields);
-
         foreach($configs as $config){
             if(!empty($config['editing']) && $config['editing'] == true){
                 switch($config['type']){
@@ -77,6 +76,20 @@ class EditingController extends Controller
                             $model->{$config['field']} = '/' . str_replace("public/images", "storage/images", $path);
                         }
                     break;
+                    case "images":
+                        if ($request->hasFile($config['field'])) {
+                            $images = $request->file($config['field']);
+                            $imagePaths = [];
+                            
+                            foreach ($images as $i => $image) {
+                                $name = $image->getClientOriginalName();
+                                $path = $image->storeAs('public/images', $name);
+                                $imagePaths[] = '/' . str_replace("public/images", "storage/images", $path);
+                            }
+                            
+                            $model->{$config['field']} = json_encode($imagePaths);
+                        }
+                        break;
                     
                     default:
                     $model->{$config['field']} = $request->input($config['field']);

@@ -151,7 +151,7 @@ class Product extends Base
                 'editing' => true,
                 'detail' => true,
                 'updating' => true,
-                'validate' => 'required|min:1|max:3',
+                'validate' => 'required|min:1|max:4|gt:1',
                 'archive' => false
             ),
             array(

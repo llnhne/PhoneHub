@@ -295,6 +295,29 @@
                                                         </script>
                                                     @break
 
+                                                    @case('images')
+                                                        <label style="font-size: medium; font-weight: 600;">{{ $config['name'] }}</label>
+                                                        <div class="input-group flex-column mb-3">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="{{ $config['field'] }}[]"
+                                                                    class="custom-file-input @error($config['field']) is-invalid @enderror"
+                                                                    placeholder="{{ htmlspecialchars($config['name']) }}"
+                                                                    onchange="updateImageName(event)" multiple>
+                                                                <label class="custom-file-label" for="{{ $config['field'] }}">{{ optional($items)->image }}</label>
+                                                            </div>
+                                                            @error($config['field'])
+                                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                        <script>
+                                                            function updateImageName(event) {
+                                                                var selectedFileName = event.target.files[0] ? event.target.files[0].name : '{{ optional($items)->image }}';
+                                                                var imageLabelElement = event.target.nextElementSibling;
+                                                                imageLabelElement.textContent = selectedFileName;
+                                                            }
+                                                        </script>
+                                                    @break
+
                                                     @case('brand_id')
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6 col-sm-12">

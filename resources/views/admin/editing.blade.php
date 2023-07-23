@@ -195,6 +195,17 @@
                                                               </div>
                                                     @break
 
+                                                    @case('images')
+                                                    <?php $field = $config['field']; ?>
+                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                            
+                                                            <div class="mb-3">
+                                                            
+                                                                <input class="form-control" type="file" id="formFile" name="{{ $config['field'] }}[]" multiple>
+                                                                
+                                                              </div>
+                                                    @break
+
                                                     @case('brand_id')
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6 col-sm-12">

@@ -11,15 +11,17 @@ use App\Models\Product;
 use App\Models\Ram;
 use App\Models\Rom;
 use App\Models\Screen;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class UpdatingController extends Controller
 {
-    public function edit($modelName,$modelId){
+    public function edit($modelName, $modelId)
+    {
         $adminUsers = Auth::guard('admin')->user();
-        $model = '\App\Models\\'.ucfirst($modelName);
+        $model = '\App\Models\\' . ucfirst($modelName);
         $model = new $model;
         $items = $model::find($modelId);
         $configs = $model->updatingConfigs();
@@ -52,7 +54,7 @@ class UpdatingController extends Controller
     public function update(Request $request, $modelName, $modelId)
     {
         $adminUser = Auth::guard('admin')->user();
-        $model = '\App\Models\\'.ucfirst($modelName);
+        $model = '\App\Models\\' . ucfirst($modelName);
         $model = new $model;
         $items = $model::findOrFail($modelId);
         $configs = $model->updatingConfigs();
@@ -65,7 +67,7 @@ class UpdatingController extends Controller
         $roms = Rom::all();
         $chips = Chip::all();
         $screens = Screen::all();
-        
+
         foreach ($configs as $config) {
             if (!empty($config['validate'])) {
                 if ($config['type'] === 'image' && !$request->hasFile($config['field'])) {
@@ -74,18 +76,18 @@ class UpdatingController extends Controller
                 $arrayValidateFields[$config['field']] = $config['validate'];
             }
         }
-        
+
         $validated = $request->validate($arrayValidateFields);
-        
+
         foreach ($configs as $config) {
             if (isset($config['updating']) && $config['updating'] == true) {
                 switch ($config['type']) {
                     case "image":
-                        if ($request->file($config['field']) !== null ) {
+                        if ($request->file($config['field']) !== null) {
                             $name = $request->file($config['field'])->getClientOriginalName();
                             $path = $request->file($config['field'])->storeAs('public/images', $name);
                             $items->{$config['field']} = '/storage/images/' . $name;
-        
+
                             // Xóa ảnh cũ chỉ khi có cập nhật ảnh mới
                             if ($items->{$config['field']} && Storage::exists($items->{$config['field']}) && $request->hasFile($config['field'])) {
                                 Storage::delete($items->{$config['field']});
@@ -95,14 +97,34 @@ class UpdatingController extends Controller
                             $items->{$config['field']} = $items->{$config['field']};
                         }
                         break;
-        
+                    case "images":
+                        if ($request->hasFile($config['field'])) {
+                            $images = $request->file($config['field']);
+                            $imagePaths = [];
+
+                            // Xóa ảnh cũ chỉ khi có cập nhật ảnh mới
+                            if ($items->{$config['field']} && $request->hasFile($config['field'])) {
+                                Storage::delete($items->{$config['field']});
+                            }
+
+                            foreach ($images as $i => $image) {
+                                $name = $image->getClientOriginalName();
+                                $path = $image->storeAs('public/images', $name);
+                                $imagePaths[] = '/storage/images/' . $path;
+                            }
+                        } else {
+                            // Giữ nguyên ảnh cũ nếu không có cập nhật ảnh
+                            $items->{$config['field']} = $items->{$config['field']};
+                        }
+                        break;
+
                     default:
                         $items->{$config['field']} = $request->input($config['field']);
                         break;
                 }
             }
         }
-        
+
         $success = $items->save();
 
         return view('admin.updating', [
@@ -124,4 +146,3 @@ class UpdatingController extends Controller
         ]);
     }
 }
-

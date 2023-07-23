@@ -117,6 +117,14 @@
                                         </div>
                                     @break
 
+                                    @case('images')
+                                        <div class="d-flex">
+                                            <p style="font-weight:700;">{{ $config['name'] }}:</p>
+                                            <img class="mx-2" height="50" onerror="this.src='/assets/images/users/ava.jpg'"
+                                                src="{{ $items->image }}" alt="">
+                                        </div>
+                                    @break
+
                                     @case('brand_id')
                                         <div class="d-flex">
                                             <p style="font-weight:700;">{{ $config['name'] }}:</p>

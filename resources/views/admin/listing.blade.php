@@ -219,6 +219,17 @@
                                                    
                                                     @break
 
+                                                @case('images')
+
+                                                    <td class="align-middle">
+                                                       
+                                                            <img height="50" onerror="this.src='/assets/images/users/ava.jpg'"
+                                                            src="{{ asset($record[$config['field']][0]) }}" alt="{{ $record[$config['field']][0] }}">
+                                                       
+                                                    </td>
+                                               
+                                                @break
+
                                                 @case('price_sales')
                                                     <td class="align-middle">
                                                         {{ number_format($record[$config['field']], 0, ',', ',') }} đ
@@ -269,6 +280,17 @@
                                                         @method('DELETE')
                                                         <td class="align-middle">
                                                             <button type="submit" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</button>
+                                                            
+                                                        </td>
+                                                        </form>
+                                                @break
+
+                                                @case('capnhat')
+                                                    <form method="POST" action="">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <td class="align-middle">
+                                                            <button type="submit" class="btn btn-success">Update</button>
                                                             
                                                         </td>
                                                         </form>

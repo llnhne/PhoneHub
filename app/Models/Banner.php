@@ -17,6 +17,13 @@ class Banner extends Base
     public $titleupdate = 'Cập Nhật - Banner Marketing';
     public $titledetail = 'Chi Tiết - Banner Marketing';
     public $titlearchive = 'Đã Xóa Gần Đây - Quản Lý Banner Marketing';
+
+    protected $fillable = [
+        'name',
+        'image' => 'array',
+        'created_at',
+        'updated_at'
+    ];
     public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
@@ -49,10 +56,10 @@ class Banner extends Base
             array(
                 'field' => 'image',
                 'name' => 'Ảnh sản phẩm Banner',
-                'type' => 'image',
+                'type' => 'images',
                 'listing' => true,
                 'editing' => true,
-                'validate' => 'required|mimes:jpeg,png,jpg,gif',
+                'validate' => false,
                 'detail' => true,
                 'updating' => true,
                 'archive' => false
@@ -104,6 +111,16 @@ class Banner extends Base
                 'name' => 'Xóa',
                 'type' => 'delete',
                 'filter' => 'delete',
+                'listing' => true,
+                'editing' => false,
+                'detail' => false,
+                'updating' => false,
+                'archive' => false
+            ),
+            array(
+                'field' => 'id',
+                'name' => 'Cập Nhật',
+                'type' => 'capnhat',
                 'listing' => true,
                 'editing' => false,
                 'detail' => false,
