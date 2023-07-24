@@ -1,4 +1,4 @@
-@extends('layouts.appuser')
+@extends('layouts.appadmin')
 
 @section('content')
     <!-- partial:index.partial.html -->

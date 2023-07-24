@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EditingController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\UpdatingController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -19,9 +20,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::middleware([
     'auth:sanctum',
@@ -40,7 +41,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
  
-    return redirect('/home');
+    return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
@@ -71,6 +72,11 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/ct/{model}/{id}', [ListingController::class, 'show'])->name('listing.show');
     Route::get('/admin/archive/{model}', [ListingController::class, 'archive'])->name('listing.archive');
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('user.index');
+Route::get('/trangchu', [HomeController::class, 'product'])->name('user.product');
+Route::get('/contact', [HomeController::class, 'contact'])->name('user.contact');
+Route::get('/category/{name}/{id}', [HomeController::class, 'category'])->name('user.headeruser');
 
 
 
