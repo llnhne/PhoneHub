@@ -101,18 +101,17 @@
 
                 </div>
 
-
+                <form action="{{ URL::to('/save-cart') }}" method="post">
+                    {{ @csrf_field(); }}
                 <div class="row mt-2">
                     <div class="buttons_added">
-                        <form action="{{ URL::to('/save-cart') }}" method="post">
-                            @csrf_field();
+                        
                             <div class="form-outline">
                                 <input name="number" type="number" id="typeNumber" class="form-control" min="1"
                                     value="1" />
                                 <input name="id_hidden" type="hidden" id="typeNumber" class="form-control" min="1"
                                     value="{{ $products->id }}" />
                             </div>
-                        </form>
                     </div>
 
                 </div>
