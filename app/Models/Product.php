@@ -36,6 +36,10 @@ class Product extends Base
         return $this->belongsTo(Brand::class);
     }
 
+    public function sale(){
+        return $this->belongsTo(Sale::class);
+    }
+
     public function category(){
         return $this->belongsTo(Category::class);
     }
@@ -110,6 +114,16 @@ class Product extends Base
                 'editing' => true,
                 'detail' => true,
                 'validate' => 'required|mimes:jpeg,png,jpg,gif',
+                'updating' => true,
+                'archive' => false
+            ),
+            array(
+                'field' => 'sale_id',
+                'name' => 'Mã giảm giá',
+                'type' => 'sale_id',
+                'listing' => false,
+                'editing' => true,
+                'detail' => true,
                 'updating' => true,
                 'archive' => false
             ),

@@ -10,7 +10,7 @@
                     <ul class="category-list">
                         @foreach ($categories as $category)
                             <li class="category-item">
-                                <a href="index.html" class="category-item__link">
+                                <a href="{{ URL::to('/danhmuc-sanpham/'.$category->id) }}" class="category-item__link">
                                     {{ $category->name }}
                                 </a>
                             </li>

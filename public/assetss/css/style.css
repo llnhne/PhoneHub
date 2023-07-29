@@ -38,7 +38,10 @@
     color: var(--primary-color);
     font-weight: 440;
 }
-
+.header-logo-img{
+    height: 50px;
+    margin-left: 20%;
+}
 .header-navbar-icon{
     font-size: 1.3rem;
     font-weight: 900;
@@ -99,10 +102,11 @@
 
 }
 .navbar-title-link::before{
-    position: absolute;
+    
     content: "";
     height: 2px;
     width: 50px;
+    text-decoration: none;
     background-color: var(--primary-color);
     top: 40px;
 }
@@ -551,15 +555,106 @@
     font-size: 1.2rem;
     font-weight: 500;
 }
-.home-product-item__percent::after{
-    content: "";
+.arrow {
+    position: relative;
+    width: 100px;
+    height: 50px;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .arrow:before {
+    content: '';
     position: absolute;
-    top: 22px;
-    left: 0px;
-    border-style: solid;
-    color: red;
-    border-width: 12px 18px;
-    border-color: red transparent transparent transparent;
+    top: 50%;
+    right: -15px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #ccc;
+    transform: translateY(-50%);
+  }
+.buttons_added {
+    opacity:1;
+    display:inline-block;
+    display:-ms-inline-flexbox;
+    display:inline-flex;
+    white-space:nowrap;
+    vertical-align:top;
+}
+.is-form {
+    overflow:hidden;
+    position:relative;
+    background-color:#f9f9f9;
+    height:2.2rem;
+    width:1.9rem;
+    padding: 20px;
+    text-shadow:1px 1px 1px #fff;
+    border:1px solid #ddd;
+}
+.is-form:focus,.input-text:focus {
+    outline:none;
+}
+.is-form.minus {
+    border-radius:4px 0 0 4px;
+}
+.is-form.plus {
+    border-radius:0 4px 4px 0;
+}
+.input-qty {
+    background-color:#fff;
+    height:2.2rem;
+    text-align:center;
+    font-size:1rem;
+    display:inline-block;
+    vertical-align:top;
+    margin:0;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    border-left:0;
+    border-right:0;
+    padding:20px;
+}
+@media (min-width: 1025px) {
+    .h-custom {
+    height: 100vh !important;
+    }
+    }
+    
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    
+    .card-registration .select-arrow {
+    top: 13px;
+    }
+    
+    .bg-grey {
+    background-color: #eae8e8;
+    }
+    
+    @media (min-width: 992px) {
+    .card-registration-2 .bg-grey {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    }
+    }
+    
+    @media (max-width: 991px) {
+    .card-registration-2 .bg-grey {
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    }
+    }
+.input-qty::-webkit-outer-spin-button,.input-qty::-webkit-inner-spin-button {
+    -webkit-appearance:none;
+    margin:0;
 }
 .home-product-item__new::after{
     content: "";

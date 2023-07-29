@@ -10,6 +10,7 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\Ram;
 use App\Models\Rom;
+use App\Models\Sale;
 use App\Models\Screen;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class UpdatingController extends Controller
         $model = new $model;
         $items = $model::find($modelId);
         $configs = $model->updatingConfigs();
+        $sales = Sale::all();
         $brands = Brand::all();
         $products = Product::all();
         $categories = Category::all();
@@ -39,6 +41,7 @@ class UpdatingController extends Controller
             'modelId' => $modelId,
             'titleupdate' => $model->titleupdate,
             'configs' => $configs,
+            'sales' => $sales,
             'brands' => $brands,
             'products' => $products,
             'categories' => $categories,
@@ -59,6 +62,7 @@ class UpdatingController extends Controller
         $items = $model::findOrFail($modelId);
         $configs = $model->updatingConfigs();
         $arrayValidateFields = [];
+        $sales = Sale::all();
         $brands = Brand::all();
         $products = Product::all();
         $categories = Category::all();
@@ -67,6 +71,7 @@ class UpdatingController extends Controller
         $roms = Rom::all();
         $chips = Chip::all();
         $screens = Screen::all();
+        
 
         foreach ($configs as $config) {
             if (!empty($config['validate'])) {
@@ -97,26 +102,32 @@ class UpdatingController extends Controller
                             $items->{$config['field']} = $items->{$config['field']};
                         }
                         break;
-                    case "images":
-                        if ($request->hasFile($config['field'])) {
-                            $images = $request->file($config['field']);
-                            $imagePaths = [];
-
-                            // Xóa ảnh cũ chỉ khi có cập nhật ảnh mới
-                            if ($items->{$config['field']} && $request->hasFile($config['field'])) {
-                                Storage::delete($items->{$config['field']});
+                        case "images":
+                            if ($request->hasFile($config['field'])) {
+                                $images = $request->file($config['field']);
+                                $imagePaths = [];
+                        
+                                // Lưu trữ giá trị created_at ban đầu
+                                $created_at = $items->created_at;
+                        
+                                // Xóa ảnh cũ chỉ khi có cập nhật ảnh mới
+                                if ($items->{$config['field']} && $request->hasFile($config['field'])) {
+                                    Storage::delete($items->{$config['field']});
+                                }
+                        
+                                foreach ($images as $i => $image) {
+                                    $name = $image->getClientOriginalName();
+                                    $path = $image->storeAs('public/images', $name);
+                                    $imagePaths[] = '/storage/images/' . $path;
+                                }
+                        
+                                // Gán giá trị created_at ban đầu vào lại $items
+                                $items->created_at = $created_at;
+                            } else {
+                                // Giữ nguyên ảnh cũ nếu không có cập nhật ảnh
+                                $items->{$config['field']} = $items->{$config['field']};
                             }
-
-                            foreach ($images as $i => $image) {
-                                $name = $image->getClientOriginalName();
-                                $path = $image->storeAs('public/images', $name);
-                                $imagePaths[] = '/storage/images/' . $path;
-                            }
-                        } else {
-                            // Giữ nguyên ảnh cũ nếu không có cập nhật ảnh
-                            $items->{$config['field']} = $items->{$config['field']};
-                        }
-                        break;
+                            break;
 
                     default:
                         $items->{$config['field']} = $request->input($config['field']);
@@ -134,6 +145,7 @@ class UpdatingController extends Controller
             'modelName' => $modelName,
             'titleupdate' => $items->titleupdate,
             'configs' => $configs,
+            'sales' => $sales,
             'brands' => $brands,
             'products' => $products,
             'categories' => $categories,

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Chip;
 use App\Models\Ram;
 use App\Models\Rom;
+use App\Models\Sale;
 use App\Models\Screen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,7 @@ class ListingController extends Controller
         $adminUsers = Auth::guard('admin')->user();
         $model = '\App\Models\\'.ucfirst($modelName);
         $items = $model::find($id);
+        $sale = Sale::all();
         $brand = Brand::all();
         $category = Category::all();
         $color = Ram::all();
@@ -61,6 +63,7 @@ class ListingController extends Controller
             'configs' => $items->detailConfigs(),
             'modelName' => $modelName,
             'items' => $items,
+            'sale' => $items->sale,
             'brand' => $items->brand,
             'category' => $items->category,
             'color' => $items->color,
