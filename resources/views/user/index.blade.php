@@ -1,39 +1,33 @@
 @extends('layouts.user')
 @section('content')
 <div class="banner">
+    
     <div class="grid wide">
         <div class="slideshow">
             <div class="slideshow-list">
+                
 
-
-                <div class="slideshow-item active">
-                    <a href="" class="slideshow-link">
-                        <img class="slideshow-img" src="{{ URL::asset('assetss/css/img/b2.jpg') }}" alt="">
-
-                        <div class="slideshow-info ">
-                           
-                            <button class="slideshow-info-btn" style="margin-top:11%">
-                                Xem ngay
-                            </button>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="slideshow-btn">
-
-
-                    <span class="slideshow-btn-item btn-prev">
-                        <i class="slideshow-btn-left fa-solid fa-angle-left"></i>
-
-                    </span>
-                    <span class="slideshow-btn-item btn-next">
-                        <i class="slideshow-btn-right fa-solid fa-angle-right"></i>
-
-                    </span>
-
-
-                </div>
-
+                <div id="carouselExampleFade" class="carousel slide carousel-fade">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="{{ URL::asset('assetss/css/img/b2.jpg') }}" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ URL::asset('assetss/css/img/b2.jpg') }}" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ URL::asset('assetss/css/img/b2.jpg') }}" class="d-block w-100" alt="...">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
             </div>
 
         </div>
@@ -111,7 +105,7 @@
 
         @foreach ($products as $item)
         <div class="col l-2-4 c-6 m-4">
-            <a href="thanhtoan.html" class="home-product-item">
+            <a href="{{ route('user.detail', ['id' => $item->id]) }}" class="home-product-item">
                 <div class="home-product-item__img">
                     <img class="product-item-img" src="{{ $item->image }}" alt="" col="g">
 
@@ -136,11 +130,18 @@
                 </div>
                 
                 <div class="home-product-icon-action">
+                    
                     <div class="icon-action add-to-cart">
+                        <form action="{{ URL::to('/save-cart') }}" method="post">
+                            {{ @csrf_field() }}
                         <button>Thêm giỏ hàng</button>
+                    </form>
                     </div>
+                    
                     <div class="icon-action icon-action-view">
-                        <button>Xem chi tiết</button>
+                        <form action="{{ URL::to('/chitietsanpham', ['id' => $item->id]) }}" method="get">
+                            <button>Xem chi tiết</button>
+                        </form>
                     </div>
                 </div>
 

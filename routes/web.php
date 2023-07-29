@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\EditingController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\UpdatingController;
@@ -8,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -74,11 +79,16 @@ Route::middleware(['admin'])->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('user.index');
-Route::get('/trangchu', [HomeController::class, 'product'])->name('user.product');
+Route::get('/products', [HomeController::class, 'product'])->name('user.product');
 Route::get('/contact', [HomeController::class, 'contact'])->name('user.contact');
+Route::get('/chitietsanpham/{id}', [DetailController::class, 'show'])->name('user.detail');
+Route::get('/danhmuc-sanpham/{id}', [CategoryController::class, 'show'])->name('user.showcategory');
+Route::get('/thuonghieu-sanpham/{id}', [BrandController::class, 'show'])->name('user.showbrand');
 Route::get('/category/{name}/{id}', [HomeController::class, 'category'])->name('user.headeruser');
 
 
+Route::post('/save-cart', [CartController::class, 'save_cart'])->name('user.detailt');
+Route::get('/show-cart', [CartController::class, 'show_cart'])->name('cart.showcart');
 
 // Route::get('admin/register',function(){
 //     return view('admin.register');

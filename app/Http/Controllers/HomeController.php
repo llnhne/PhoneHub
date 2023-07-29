@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -34,10 +35,12 @@ class HomeController extends Controller
         $brands = Brand::all();
         $categories = Category::all();
         $products = Product::paginate(6);
+        $sales = Sale::all();
         return view('user.product',[
             'brands' => $brands,
             'categories' => $categories,
-            'products' => $products
+            'products' => $products,
+            'sales' => $sales
         ]);
     }
     public function contact(){

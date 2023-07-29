@@ -47,18 +47,6 @@ class Sale extends Base
                 'archive' => true
             ),
             array(
-                'field' => 'price',
-                'name' => 'Giá gốc',
-                'type' => 'number',
-                'sort' => true,
-                'listing' => true,
-                'editing' => true,
-                'validate' => 'required|min:5|max:12',
-                'detail' => true,
-                'updating' => true,
-                'archive' => false
-            ),
-            array(
                 'field' => 'price_sales',
                 'name' => 'Giá giảm',
                 'type' => 'price_sales',
@@ -66,16 +54,6 @@ class Sale extends Base
                 'listing' => true,
                 'editing' => true,
                 'validate' => 'required|min:5|max:12',
-                'detail' => true,
-                'updating' => true,
-                'archive' => false
-            ),
-            array(
-                'field' => 'products_id',
-                'name' => 'Mã loại sản phẩm',
-                'type' => 'products_id',
-                'listing' => false,
-                'editing' => true,
                 'detail' => true,
                 'updating' => true,
                 'archive' => false

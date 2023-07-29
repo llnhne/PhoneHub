@@ -9,6 +9,7 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\Ram;
 use App\Models\Rom;
+use App\Models\Sale;
 use App\Models\Screen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ class EditingController extends Controller
         $model = '\App\Models\\'.ucfirst($modelName);
         $model = new $model;
         $configs = $model->editingConfigs();
+        $sales = Sale::all();
         $brands = Brand::all();
         $products = Product::all();
         $categories = Category::all();
@@ -33,6 +35,7 @@ class EditingController extends Controller
             'modelName' => $modelName,
             'titlecreate' => $model->titlecreate,
             'configs' => $configs,
+            'sales' => $sales,
             'brands' => $brands,
             'products' => $products,
             'categories' => $categories,
@@ -49,6 +52,7 @@ class EditingController extends Controller
         $model = new $model;
         $configs = $model->editingConfigs();
         $arrayValidateFields = [];
+        $sales = Sale::all();
         $brands = Brand::all();
         $products = Product::all();
         $categories = Category::all();
@@ -103,6 +107,7 @@ class EditingController extends Controller
             'modelName' => $modelName,
             'titlecreate' => $model->titlecreate,
             'configs' => $configs,
+            'sales' => $sales,
             'brands' => $brands,
             'products' => $products,
             'categories' => $categories,

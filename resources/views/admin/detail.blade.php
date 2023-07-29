@@ -95,19 +95,13 @@
                                     </div>
                                 @break
 
-                                @case('price_sales')
+                                @case('sale_id')
                                     <div class="d-flex">
                                         <p style="font-weight:700;">{{ $config['name'] }}:</p>
-                                        <p class="mx-2">{{ number_format($items->price_sales, 0, ',', ',') }} đ</p>
+                                        <p class="mx-2">{{ number_format($items->sale->price_sales, 0, ',', ',') }} đ</p>
                                     </div>
-                                    @break
+                                @break
 
-                                    @case('products_id')
-                                        <div class="d-flex">
-                                            <p style="font-weight:700;">{{ $config['name'] }}:</p>
-                                            <p class="mx-2">{{ $items->products_id }}</p>
-                                        </div>
-                                    @break
 
                                     @case('image')
                                         <div class="d-flex">
@@ -124,6 +118,8 @@
                                                 src="{{ $items->image }}" alt="">
                                         </div>
                                     @break
+
+                                    
 
                                     @case('brand_id')
                                         <div class="d-flex">
@@ -184,14 +180,14 @@
                                     @case('description')
                                         <div class="">
                                             <p style="font-weight:700;">{{ $config['name'] }}:</p>
-                                            <p class="mx-2">{{ $items->description }}</p>
+                                            <p class="mx-2">{!! $items->description !!}</p>
                                         </div>
                                     @break
 
                                     @case('ckeditor')
                                         <div class="">
                                             <p style="font-weight:700;">{{ $config['name'] }}:</p>
-                                            <p class="mx-2">{{ $items->description }}</p>
+                                            <p class="mx-2">{!! $items->description !!}</p>
                                         </div>
                                     @break
 

@@ -1,6 +1,5 @@
 @extends('layouts.user')
 @section('content')
-<div class="content">
 <div class="banner-header">
     <div class="grid wide">
         <div class="product-banner">
@@ -56,12 +55,24 @@
             </div>
 
             <div class="col-lg-9">
-                <h1 class="text-center fw-bold mt-4">SẢN PHẨM MỚI NHẤT</h1>
+                
+                @foreach ($brand_name as $brand)
+                    <h1 class="text-center fw-bold mt-4">THƯƠNG HIỆU: {{ $brand->name }}</h1>
+                @endforeach
+              
+                
                 <div class="row sm-gutter ">
 
-                    @foreach ($products as $product)
+                    @foreach ($brand_by_id as $product)
+                
+                        
+                    
+                        
+                    
                     <div class="col-lg-4 col-md-4 col-sm-6 mt-4">
-                        <a href="{{ URL::to('/chitietsanpham', ['id' => $product->id]) }}" class="home-product-item">
+                        @foreach ($product_by_id as $item)
+                        <a href="{{ route('user.detail', ['id' => $item->id]) }}" class="home-product-item">
+                            @endforeach
                             <div class="home-product-item__img">
                                 <img class="product-item-img" src="{{ $product->image }}" alt="">
                             </div>
@@ -87,72 +98,25 @@
             
                             </div>
                             @endif
+                           
                             @endforeach
                             <div class="home-product-icon-action">
-                                
                                 <div class="icon-action add-to-cart">
-                                    <form action="{{ URL::to('/save-cart') }}" method="post">
-                                        {{ @csrf_field() }}
                                     <button>Thêm giỏ hàng</button>
-                                </form>
                                 </div>
-                                
                                 <div class="icon-action icon-action-view">
-                                    <form action="{{ URL::to('/chitietsanpham', ['id' => $product->id]) }}" method="get">
-                                        <button>Xem chi tiết</button>
-                                    </form>
+                                    <button>Xem chi tiết</button>
                                 </div>
-                                
                             </div>
                         </a>
                     </div>
                     
                     @endforeach
 
-                    
-                    <div class="col-md-12 col-sm-12 mt-4" >
-                        <div class="d-flex justify-content-end" >
-                            {{ $products->links('pagination::bootstrap-4') }}
-                           
-                        </div>
-                        
-                    </div>
-                    
-                    
             </div>
         </div>
     </div>
 </div>
-</div>
-<script>
-    var isPaginationAjax = false; // Biến kiểm tra xem có phải là phân trang Ajax hay không
 
-$(document).on('click', '#pagination-container a', function(e) {
-    e.preventDefault();
-});
-    // Kiểm tra xem phân trang đã được thực hiện hay chưa
-    if (!isPaginationAjax) {
-        isPaginationAjax = true; // Đặt biến isPaginationAjax thành true để chỉ thực hiện phân trang Ajax một lần
-
-        let url = $(this).attr('href');
-        
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dataType: 'html',
-            success: function(response) {
-                $('#pagination-container').html(response);
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-            },
-            complete: function() {
-                isPaginationAjax = false; // Đặt biến isPaginationAjax thành false để cho phép phân trang Ajax lần tiếp theo
-            }
-        });
-    }
-
-</script>
 @endsection
 

@@ -129,7 +129,7 @@
 
                                                         @case('price_sales')
                                                         <?php $field = $config['field']; ?>
-                                                            <div class="row">
+                                                            
                                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                                     <div class="form-group ">
                                                                         <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
@@ -143,26 +143,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            
+                                                            </div>
                                                         @break
 
-                                                        @case('products_id')
-                                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
-                                                                    <div class="input-group">
-                                                                        <select
-                                                                            class="select2 form-control @error('brand_id') is-invalid @enderror"
-                                                                            data-toggle="select2" name="{{ $config['field'] }}">
-                                                                                @foreach ($products as $product)
-                                                                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                                                                @endforeach
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @break
 
                                                     @case('number')
                                                         <?php $field = $config['field']; ?>
@@ -183,8 +166,10 @@
                                                     @break
 
                                                     @case('image')
-                                                    <?php $field = $config['field']; ?>
-                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <?php $field = $config['field']; ?>
+                                                            <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
                                                             
                                                             <div class="mb-3">
                                                             
@@ -193,7 +178,28 @@
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror
                                                               </div>
+                                                        </div>
+                                                    
                                                     @break
+
+                                                    @case('sale_id')
+                                                        
+                                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <div class="form-group">
+                                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                        <div class="input-group">
+                                                                            <select class="select2 form-control" data-toggle="select2" name="{{ $config['field'] }}">
+                                                                                @foreach ($sales as $sale)
+                                                                                    <option value="{{ $sale->id }}">{{ $sale->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @break
 
                                                     @case('images')
                                                     <?php $field = $config['field']; ?>

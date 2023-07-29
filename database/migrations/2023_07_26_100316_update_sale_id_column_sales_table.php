@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sales', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->float('price_sales', 11, 0)->nullable();
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->unsignedInteger('sale_id')->after('description');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sales');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

@@ -214,7 +214,7 @@
 
                                                         @case('price_sales')
                                                             <?php $field = $config['field']; ?>
-                                                            <div class="row">
+                                                           
                                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                                     <div class="form-group ">
                                                                         <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
@@ -230,28 +230,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                        </div>
                                                             @break
 
-                                                            @case('products_id')
-                                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
-                                                                        <div class="input-group">
-                                                                            <select
-                                                                                class="select2 form-control @error('brand_id') is-invalid @enderror"
-                                                                                data-toggle="select2"
-                                                                                name="{{ $config['field'] }}">
-                                                                                @foreach ($products as $product)
-                                                                                    <option value="{{ $product->id }}" {{ ($product->id === $items->products_id) ? 'selected' : '' }}>
-                                                                                        {{ $product->name }}
-                                                                                    </option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @break
 
                                                         @case('number')
                                                             <?php $field = $config['field']; ?>
@@ -273,19 +254,21 @@
                                                     @break
 
                                                     @case('image')
-                                                        <label style="font-size: medium; font-weight: 600;">{{ $config['name'] }}</label>
-                                                        <div class="input-group flex-column mb-3">
-                                                            <div class="custom-file">
-                                                                <input type="file" name="{{ $config['field'] }}"
-                                                                    class="custom-file-input @error($config['field']) is-invalid @enderror"
-                                                                    placeholder="{{ htmlspecialchars($config['name']) }}"
-                                                                    onchange="updateImageName(event)">
-                                                                <label class="custom-file-label" for="{{ $config['field'] }}">{{ optional($items)->image }}</label>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <label style="font-size: medium; font-weight: 600;">{{ $config['name'] }}</label>
+                                                            <div class="input-group flex-column mb-3">
+                                                                <div class="custom-file">
+                                                                    <input type="file" name="{{ $config['field'] }}"
+                                                                        class="custom-file-input @error($config['field']) is-invalid @enderror"
+                                                                        placeholder="{{ htmlspecialchars($config['name']) }}"
+                                                                        onchange="updateImageName(event)">
+                                                                    <label class="custom-file-label" for="{{ $config['field'] }}">{{ optional($items)->image }}</label>
+                                                                </div>
+                                                                @error($config['field'])
+                                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
-                                                            @error($config['field'])
-                                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
                                                         <script>
                                                             function updateImageName(event) {
                                                                 var selectedFileName = event.target.files[0] ? event.target.files[0].name : '{{ optional($items)->image }}';
@@ -293,7 +276,32 @@
                                                                 imageLabelElement.textContent = selectedFileName;
                                                             }
                                                         </script>
+                                                            </div>
+                                                        
                                                     @break
+
+                                                    @case('sale_id')
+                                                        
+                                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <div class="form-group">
+                                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                        <div class="input-group">
+                                                                            <select class="select2 form-control"
+                                                                                data-toggle="select2"
+                                                                                name="{{ $config['field'] }}">
+                                                                                @foreach ($sales as $sale)
+                                                                                    <option value="{{ $sale->id }}" {{ ($sale->id === $items->sale_id) ? 'selected' : '' }}>
+                                                                                        {{ $sale->name }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @break
 
                                                     @case('images')
                                                         <label style="font-size: medium; font-weight: 600;">{{ $config['name'] }}</label>

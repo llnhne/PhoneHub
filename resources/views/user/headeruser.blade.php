@@ -1,7 +1,7 @@
 
     <div class="header-logo">
         <a href="" class="header-logo-link">
-            <img src="{{ URL::asset('assetss/css/img/logo1.webp') }}" alt="" class="header-logo-img">
+            <img src="/storage/images/logo3.jpg" alt="" class="header-logo-img">
         </a>
     </div>
 
@@ -14,7 +14,7 @@
             </li>
 
             <li class="header-navbar-item mega-menu  nav-bridge">
-                <a href="/trangchu" class="header-navbar-link">
+                <a href="/products" class="header-navbar-link">
                     Danh mục
                     <i class="header-navbar-icon fa-solid fa-angle-down"></i>
                 </a>
@@ -25,7 +25,7 @@
                             
                                 <div class="navbar-title">
                                     @foreach ($categories as $cate)
-                                    <a href="" class="navbar-title-link" style="margin-left:35px;">
+                                    <a href="{{ URL::to('/danhmuc-sanpham/'.$cate->id) }}" class="navbar-title-link" style="margin-left:35px;">
                                         {{ $cate->name }}
                                     </a>
                                     @endforeach
@@ -57,7 +57,7 @@
             </li>
 
             <li class="header-navbar-item sup-dropdown">
-                <a href="/trangchu" class="header-navbar-link">
+                <a href="/products" class="header-navbar-link">
                     Thương hiệu
                     <i class="header-navbar-icon fa-solid fa-angle-down"></i>
                 </a>
@@ -66,7 +66,7 @@
                         
                         @foreach ($brands as $brand)
                         <li class="sup-menu-drop-item">
-                            <a href="" class="sup-menu-drop-link">
+                            <a href="{{ URL::to('/thuonghieu-sanpham/'.$brand->id) }}" class="sup-menu-drop-link">
                                 {{ $brand->name }}
 
                             </a>
@@ -113,23 +113,22 @@
 
                 </div>
             </li>
-
+            <form action="{{ URL::to('/save-cart') }}" method="post">
+                {{ @csrf_field() }}
             <li class="header-icon-item">
                 
-                        <a href="/register" class="header-icon-link icon-bridge" data-origial-title="Đăng Ký"
+                        <a href="/register" class="header-icon-link icon-bridge" data-origial-title="Tài khoản"
                     data-tooltip="tooltip"><i class="header-icon fa-solid fa-user"></i></a>
                 
             </li>
-
+            </form>
             
 
             <li class="header-icon-item header-item-pay">
                 <span href="" class="header-icon-link icon-bridge" data-origial-title="Giỏ hàng"
                     data-tooltip="tooltip">
                     <i class="header-icon fa-solid fa-cart-shopping"></i>
-                    <span class="number-cart">0</span>
-
-
+                
                 </span>
                 <div class="model-overlay">
 
