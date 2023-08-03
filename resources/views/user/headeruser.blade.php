@@ -88,98 +88,31 @@
     <div class="header-group-icon">
         <ul class="header-icon-list">
             <li class="header-icon-item showsearch">
-                <span href="" class="header-icon-link icon-bridge" data-origial-title="tìm kiếm"
+                <span href="" class="header-icon-link icon-bridge" data-origial-title="Lịch sử đơn"
                     data-tooltip="tooltip">
                     <i class="header-icon header-icon-event fa-solid fa-magnifying-glass"></i>
 
                 </span>
-                <div class="header-active-drop">
-                    <form action="">
-                        <div class="header-active-content">
-                            <p class="header-active-search">
-                                TÌM KIẾM
-                            </p>
-                            <div class="site-search">
-                                <div class="search-inner">
-                                    <input type="text" placeholder="Tìm kiếm sản phẩm..." class="search-inner-input
-                                    ">
-                                </div>
-                                <button type="button" class="search-inner-btn">
-                                    <i class="search-inner-icon fa-solid fa-magnifying-glass "></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
             </li>
-            <form action="{{ URL::to('/save-cart') }}" method="post">
-                {{ @csrf_field() }}
+            
             <li class="header-icon-item">
                 
                         <a href="/register" class="header-icon-link icon-bridge" data-origial-title="Tài khoản"
                     data-tooltip="tooltip"><i class="header-icon fa-solid fa-user"></i></a>
+                    
                 
             </li>
-            </form>
             
-
-            <li class="header-icon-item header-item-pay">
-                <span href="" class="header-icon-link icon-bridge" data-origial-title="Giỏ hàng"
-                    data-tooltip="tooltip">
-                    <i class="header-icon fa-solid fa-cart-shopping"></i>
-                
-                </span>
-                <div class="model-overlay">
-
-                    <div class="model">
-                        <div class="header-model">
-                            GIỎ HÀNG
-                        </div>
-
-                        <div class="model-content">
-
-                            <div class="cart-scroll">
-                                <table class="cart-view">
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">
-                                                <i class="text-center-icon fa-solid fa-cart-shopping"></i>
-                                                <p>Hiện chưa có sản phẩm</p>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <span class="live"></span>
-
-                            <table class="table-total">
-                                <tbody>
-                                    <tr>
-                                        <td class="text-left">TỔNG TIỀN</td>
-                                        <td class="text-right">0đ</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left text-cart">
-                                            <a href="#">Xem giỏ hàng</a>
-                                        </td>
-                                        <td class="text-right text-pay">
-                                            <a href="">Thanh toán</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <span class="model-close">
-                            <i class="model-close-icon fa-solid fa-circle-xmark"></i>
-                        </span>
-                    </div>
-                </div>
-            </li>
-
+            
+            <form action="{{ URL::to('/show-cart') }}" method="post">
+                {{ @csrf_field() }}
+                  <li class="header-icon-item header-item-pay">
+                    <a href="/show-cart" class="header-icon-link icon-bridge" data-origial-title="Giỏ hàng" data-tooltip="tooltip">
+                      <i class="header-icon fa-solid fa-cart-shopping"></i>
+                      <span class="number-cart">{{ Cart::count() }}</span>
+                    </a>
+                  </li>
+              </form>
         </ul>
     </div>
     

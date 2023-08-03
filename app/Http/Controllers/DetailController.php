@@ -17,6 +17,7 @@ class DetailController extends Controller
     $products = Product::find($id);
     $categories = Category::all();
     $brands = Brand::all();
+    $sales = Sale::all();
     $details_product = DB::table('products')
         ->join('categories','categories.id','=','products.category_id')
         ->join('brands','brands.id', '=', 'products.brand_id')
@@ -36,20 +37,13 @@ class DetailController extends Controller
         'sale'
     ]);
 
-    if ($request->ajax()) {
-        return view('user.detail', [
-            'products' => $products,
-            'categories' => $categories,
-            'brands' => $brands
-        ])->render();
-    }
-
     return view('user.detail', [
         'products' => $products,
         'categories' => $categories,
         'brands' => $brands,
         'details_product' => $details_product,
         'related' => $related_product,
+        'sales' => $sales
     ]);
 }
     public function cateproduct($id){

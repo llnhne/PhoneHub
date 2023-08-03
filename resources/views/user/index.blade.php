@@ -116,26 +116,36 @@
                     {{ $item->name }}
                 </h3>
 
-                <div class="home-product-item__price">
+                @foreach ($sales as $sale)
+                                <?php $total =  $sale->price_sales + $item->price ?>
+                            
+                            @if ($item->sale_id === $sale->id)
+                            <div class="home-product-item__price">
 
 
-                    <span class="text-center">{{  number_format($item->price, 0, ',', ',') }}đ</span>
+                                
+                                <span class="home-product-item__price-current fw-semibold">{{  number_format($item->price, 0, ',', ',') }}đ</span>
+                                <span class="home-product-item__price-old">{{  number_format($total, 0, ',', ',') }}đ</span>
+                            </div>
+                            
+                                
+                            
+                            <div class="home-product-item__sale-off">
+                                <span class="home-product-item__percent">HOT</span>
+            
+            
+                            </div>
+                            @endif
+                            @endforeach
 
-                </div>
-
-                <div class="home-product-item__sale-off">
-                    <span class="home-product-item__percent">HOT</span>
-
-
-                </div>
+                
                 
                 <div class="home-product-icon-action">
                     
                     <div class="icon-action add-to-cart">
-                        <form action="{{ URL::to('/save-cart') }}" method="post">
-                            {{ @csrf_field() }}
-                        <button>Thêm giỏ hàng</button>
-                    </form>
+                    
+                        <button name="add-to-cart">Thêm giỏ hàng</button>
+    
                     </div>
                     
                     <div class="icon-action icon-action-view">

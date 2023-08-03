@@ -32,7 +32,14 @@
     
 </div>
     <script src="{{ URL::asset('assetss/css/main.js') }}"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.login').click(function(){
+                swal("Vui lòng đăng nhập để thực hiện !");
+            })
+        });
+    </script>
 </body>
 
 </html>

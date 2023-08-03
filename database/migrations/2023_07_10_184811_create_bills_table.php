@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('address');
             $table->float('sum_price', 12, 0);
             $table->text('description')->nullable();
-            $table->unsignedInteger('users_id');
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('pays_id');
             $table->timestamps();
         });

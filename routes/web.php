@@ -9,6 +9,9 @@ use App\Http\Controllers\EditingController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\UpdatingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\VnpayController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -76,6 +79,7 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/admin/delete/{model}/{id}', [ListingController::class, 'delete'])->name('listing.delete')->withTrashed();
     Route::get('/admin/ct/{model}/{id}', [ListingController::class, 'show'])->name('listing.show');
     Route::get('/admin/archive/{model}', [ListingController::class, 'archive'])->name('listing.archive');
+    Route::get('/generate-pdf', [PDFController::class, 'generatePDF']);
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('user.index');
@@ -87,8 +91,16 @@ Route::get('/thuonghieu-sanpham/{id}', [BrandController::class, 'show'])->name('
 Route::get('/category/{name}/{id}', [HomeController::class, 'category'])->name('user.headeruser');
 
 
-Route::post('/save-cart', [CartController::class, 'save_cart'])->name('user.detailt');
+
+Route::post('/save-cart', [CartController::class, 'save_cart']);
+Route::post('/add-cart-ajax', [CartController::class, 'add_cart_ajax']);
+Route::post('/update-cart', [CartController::class, 'update_cart']);
 Route::get('/show-cart', [CartController::class, 'show_cart'])->name('cart.showcart');
+Route::get('/delete-to-cart/{rowId}', [CartController::class, 'delete_to_cart'])->name('cart.showcart');
+
+
+Route::post('/vnpay_payment', [VnpayController::class, 'vnpay_payment']);
+Route::get('/orderdetail',[OrderDetailController::class, 'index']);
 
 // Route::get('admin/register',function(){
 //     return view('admin.register');

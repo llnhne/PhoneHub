@@ -100,7 +100,7 @@ return [
 
     'from' => [
         'address' => 'lelananh26012002@gmail.com',
-        'name' => 'laravelapp.com',
+        'name' => 'PhoneHub.com',
     ],
 
     /*
