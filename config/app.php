@@ -171,7 +171,8 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         // Unisharp\Ckeditor\ServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class
     ])->toArray(),
 
     /*
@@ -190,6 +191,7 @@ return [
         'Ckeditor' => Unisharp\Ckeditor\Facades\Ckeditor::class,
         'Ckfinder' => Unisharp\Ckeditor\Facades\Ckfinder::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'PDF' => Barryvdh\Debugbar\Facades::class,
     ])->toArray(),
 
 ];

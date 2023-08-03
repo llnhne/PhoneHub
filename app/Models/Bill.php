@@ -111,20 +111,10 @@ class Bill extends Base
                 'archive' => false
             ),
             array(
-                'field' => 'users_id',
+                'field' => 'user_id',
                 'name' => 'Mã khách hàng',
-                'type' => 'users_id',
+                'type' => 'user_id',
                 'listing' => false,
-                'editing' => true,
-                'detail' => true,
-                'updating' => false,
-                'archive' => false
-            ),
-            array(
-                'field' => 'pays_id',
-                'name' => 'Mã thanh toán',
-                'type' => 'pays_id',
-                'listing' => true,
                 'editing' => true,
                 'detail' => true,
                 'updating' => false,

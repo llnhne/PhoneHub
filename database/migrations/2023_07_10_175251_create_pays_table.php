@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('payments');
             $table->string('transaction');
-            $table->unsignedInteger('users_id');
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('bills_id');
             $table->timestamps();
         });

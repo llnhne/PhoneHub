@@ -23,42 +23,57 @@
                                                 </div>
                                                 <div class="col-md-3 col-lg-3 col-xl-3">
                                                     <h6 class="text-muted">{{ $content->name }}</h6>
-                                                    <h6 class="text-black mb-0">{{ $content->id }}</h6>
+                                                    <h6 class="text-black mb-0">Mã SP: {{ $content->id }}</h6>
                                                 </div>
                                                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                    <button class="btn btn-link px-2"
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                        <i class="fas fa-minus"></i>
-                                                    </button>
+                                                    <form action="{{ URL::to('update-cart') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="rowId_cart"
+                                                            value="{{ $content->rowId }}">
+                                                        <div class="d-flex">
+                                                            <button class="btn btn-link px-2"
+                                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                                <i class="fas fa-minus"></i>
+                                                            </button>
 
-                                                    <input id="form1" min="0" name="quantity" value="{{ $content->quantity }}"
-                                                        type="number" class="form-control form-control-sm" />
+                                                            <input id="form1" min="1" name="quantity"
+                                                                value="{{ $content->qty }}" type="number"
+                                                                class="form-control form-control-sm" />
 
-                                                    <button class="btn btn-link px-2"
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
+                                                            <button class="btn btn-link px-2"
+                                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                        </div>
+
+
+                                                    </form>
                                                 </div>
                                                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                                     <h6 class="mb-0">
-                                                      <?= $subtotal = $content->price * $content->quantity
+                                                        <?php
+                                                        $subtotal = $content->price * $content->qty;
                                                         echo number_format($subtotal, 0, ',', ',');
-                                                      ?>
+                                                        ?>
+
                                                     </h6>
                                                 </div>
                                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                    <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+                                                    <a href="{{ URL::to('/delete-to-cart/' . $content->rowId) }}"
+                                                        class="text-muted"><i class="fas fa-times"></i></a>
                                                 </div>
-                                                
-                                            </div>
-                                            @endforeach
-                                            <hr class="my-4">
 
-                                            <div class="pt-5">
-                                                <h6 class="mb-0"><a href="#!" class="text-body"><i
-                                                            class="fas fa-long-arrow-alt-left me-2"></i>Quay lại trang sản phẩm.</a>
+                                            </div>
+                                            <div class="pt-3">
+                                                <h6 class="mb-0"><a
+                                                        href="{{ URL::to('/chitietsanpham', ['id' => $content->id]) }}"
+                                                        class="text-body"><i
+                                                            class="fas fa-long-arrow-alt-left me-2"></i>Quay lại trang sản
+                                                        phẩm.</a>
                                                 </h6>
                                             </div>
+                                            <hr class="my-4">
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-lg-4 bg-grey">
@@ -68,7 +83,7 @@
 
                                         <div class="d-flex justify-content-between mb-4">
                                             <h5 class="text-uppercase">Số sản phẩm: {{ Cart::count() }}</h5>
-                                            <h5>{{ Cart::total() }}đ</h5>
+                                            <h5>{{ number_format(Cart::subtotal()) }}đ</h5>
                                         </div>
 
                                         <h5 class="text-uppercase mb-3">Mã Giảm Giá</h5>
@@ -76,27 +91,71 @@
                                         <div class="mb-5">
                                             <div class="form-outline">
                                                 <input type="text" id="form3Examplea2"
-                                                    class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Examplea2">Nhập mã khuyễn mãi</label>
+                                                    class="form-control form-control-lg" value="" />
+                                                <label class="form-label" for="form3Examplea2">Đã áp dụng khuyễn mãi</label>
                                             </div>
                                         </div>
 
 
                                         <hr class="my-4">
+                                        <h5 class="text-uppercase mb-3">Check Out</h5>
+                                        <form action="{{ URL::to('vnpay_payment') }}" method="POST">
+                                            @csrf
+                                            <input name="user_id" type="hidden" id="form3Examplea2"
+                                                class="form-control form-control-lg" value="{{ Auth::user()->id }}" />
 
-                                        <div class="d-flex justify-content-between mb-5">
-                                            <h5 class="text-uppercase">Tổng Thanh Toán: </h5>
-                                            <h5>{{ Cart::total() }}đ</h5>
-                                        </div>
+                                            <div class="mb-3">
+                                                <div class="form-outline">
+                                                    <input name="user_name" type="text" id="form3Examplea2"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea2">Nhập tên</label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-outline">
+                                                    <input name="phone_number" type="number" id="form3Examplea2"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea2">Số Điện Thoại</label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-outline">
+                                                    <input name="email" type="text" id="form3Examplea2"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea2">Email</label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-outline">
+                                                    <input name="address" type="text" id="form3Examplea2"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea2">Địa Chỉ</label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-outline">
+                                                    <textarea name="description" type="text" id="form3Examplea2" class="form-control form-control-lg"> </textarea>
+                                                    <label class="form-label" for="form3Examplea2">Ghi Chú</label>
+                                                </div>
+                                            </div>
 
-                                        <form action="" method="get">
-                                          <button type="button" class="btn btn-dark btn-block btn-lg"
-                                            data-mdb-ripple-color="dark">Thanh Toán</button>
+
+                                            <hr class="my-4">
+
+                                            <div class="d-flex justify-content-between mb-5">
+                                                <h5 class="text-uppercase">Tổng Thanh Toán: </h5>
+                                                <h5>{{ number_format(Cart::subtotal()) }}đ</h5>
+                                            </div>
+
+
+                                            <input type="hidden" name="total_vnpay" value="{{ Cart::subtotal() }}">
+                                            <button name="redirect" type="submit" class="btn btn-dark btn-block btn-lg"
+                                                data-mdb-ripple-color="dark">Thanh Toán</button>
                                         </form>
 
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>

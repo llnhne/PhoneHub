@@ -81,12 +81,6 @@
                                     </div>
                                 @break
 
-                                @case('pays_id')
-                                    <div class="d-flex">
-                                        <p style="font-weight:700;">{{ $config['name'] }}:</p>
-                                        <p class="mx-2">{{ $items->pays_id }}</p>
-                                    </div>
-                                @break
 
                                 @case('number')
                                     <div class="d-flex">

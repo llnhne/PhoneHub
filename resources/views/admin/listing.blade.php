@@ -24,7 +24,7 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-secondary">Copy</button>
-                                    <button type="button" class="btn btn-secondary">PDF</button>
+                                    <button type="button" class="btn btn-secondary"><a href="/generate-pdf" class="text-white" style="text-decoration:none;">PDF</a></button>
                                     <button type="button" class="btn btn-secondary">Excel</button>
                                 </div>
                             </div>
@@ -204,11 +204,6 @@
                                                     </td>
                                                 @break
 
-                                                @case('pays_id')
-                                                    <td class="align-middle">
-                                                        {{ $record[$config['field']] }}
-                                                    </td>
-                                                @break
 
                                                 @case('image')
                                                     

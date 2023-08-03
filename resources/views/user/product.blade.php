@@ -60,25 +60,37 @@
                 <div class="row sm-gutter ">
 
                     @foreach ($products as $product)
+                    
                     <div class="col-lg-4 col-md-4 col-sm-6 mt-4">
-                        <a href="{{ URL::to('/chitietsanpham', ['id' => $product->id]) }}" class="home-product-item">
-                            <div class="home-product-item__img">
+                        <form action="">
+                            @csrf
+                            <input type="hidden" name="cart_product_id_{{ $product->id }}" value="{{ $product->id }}" class="cart_product_id_{{ $product->id }}">
+                            <input type="hidden" name="cart_product_name_{{ $product->id }}" value="{{ $product->name }}" class="cart_product_name_{{ $product->id }}">
+                            <input type="hidden" name="cart_product_image_{{ $product->id }}" value="{{ $product->image }}" class="cart_product_image_{{ $product->id }}">
+                            <input type="hidden" name="cart_product_price_{{ $product->id }}" value="{{ $product->price }}" class="cart_product_price_{{ $product->id }}">
+                            <input type="hidden" name="cart_product_qty_{{ $product->id }}" value="1" class="cart_product_qty_{{ $product->id }}">
+                        
+                            <div class="home-product-item">
+                            <a  href="{{ URL::to('/chitietsanpham', ['id' => $product->id]) }}"  class="home-product-item__img">
+                                
                                 <img class="product-item-img" src="{{ $product->image }}" alt="">
-                            </div>
+                            </a>
 
                             <h4 class="fw-semibold text-center mt-4 text-dark">
                                 {{ $product->name }}
                             </h4>
-
+                            @foreach ($sales as $sale)
+                                <?php $total =  $sale->price_sales + $product->price ?>
+                            
+                            @if ($product->sale_id === $sale->id)
                             <div class="home-product-item__price">
 
 
-                                <span class="home-product-item__price-current text-center">{{  number_format($product->price, 0, ',', ',') }}đ</span>
-                            </div>
-                            @foreach ($sales as $sale)
                                 
+                                <span class="home-product-item__price-current fw-semibold">{{  number_format($product->price, 0, ',', ',') }}đ</span>
+                                <span class="home-product-item__price-old">{{  number_format($total, 0, ',', ',') }}đ</span>
+                            </div>
                             
-                            @if ($product->sale_id === $sale->id)
                                 
                             
                             <div class="home-product-item__sale-off">
@@ -86,27 +98,31 @@
             
             
                             </div>
+                        
                             @endif
+                        
                             @endforeach
-                            <div class="home-product-icon-action">
+                      
+
+                        <div class="home-product-icon-action">
                                 
-                                <div class="icon-action add-to-cart">
-                                    <form action="{{ URL::to('/save-cart') }}" method="post">
-                                        {{ @csrf_field() }}
-                                    <button>Thêm giỏ hàng</button>
-                                </form>
-                                </div>
-                                
-                                <div class="icon-action icon-action-view">
-                                    <form action="{{ URL::to('/chitietsanpham', ['id' => $product->id]) }}" method="get">
-                                        <button>Xem chi tiết</button>
-                                    </form>
-                                </div>
+                            <div class="icon-action add-to-cart">
+                               
+                                <button type="button" name="add-to-cart" data-id_product="{{ $product->id }}">Thêm giỏ hàng</button>
                                 
                             </div>
-                        </a>
+                            
+                            <a href="{{ URL::to('/chitietsanpham', ['id' => $product->id]) }}" class="icon-action icon-action-view">
+                               
+                                    <button>Xem chi tiết</button>
+                                
+                            </a>
+                            
+                        </div>
                     </div>
-                    
+                </form>
+                    </div>
+                
                     @endforeach
 
                     
@@ -124,35 +140,6 @@
     </div>
 </div>
 </div>
-<script>
-    var isPaginationAjax = false; // Biến kiểm tra xem có phải là phân trang Ajax hay không
-
-$(document).on('click', '#pagination-container a', function(e) {
-    e.preventDefault();
-});
-    // Kiểm tra xem phân trang đã được thực hiện hay chưa
-    if (!isPaginationAjax) {
-        isPaginationAjax = true; // Đặt biến isPaginationAjax thành true để chỉ thực hiện phân trang Ajax một lần
-
-        let url = $(this).attr('href');
-        
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dataType: 'html',
-            success: function(response) {
-                $('#pagination-container').html(response);
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-            },
-            complete: function() {
-                isPaginationAjax = false; // Đặt biến isPaginationAjax thành false để cho phép phân trang Ajax lần tiếp theo
-            }
-        });
-    }
-
-</script>
 @endsection
+
 

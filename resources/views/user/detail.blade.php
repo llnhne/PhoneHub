@@ -3,7 +3,7 @@
     <div class="grid wide" style="margin-top:7%">
         <div class="row">
 
-            <div class="col-lg-6 ">
+            <div class="col-lg-8 ">
                 <div class="col-flex">
                     <div class="slide-thumb">
                         <div class="slide-thumb-list">
@@ -41,13 +41,13 @@
             </div>
 
 
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <h1 class="container__order-heading fw-semibold">
                     {{ $products->name }}
                 </h1>
                 <div class="d-flex">
                     <h4 class="fw-semibold">Mã sản phẩm: </h4>
-                    <p class="fs-5 mx-2">{{ $products->name }}</p>
+                    <p class="fs-5 mx-2">{{ $products->id }}</p>
                 </div>
                 <div class="d-flex mt-2">
                     <h4 class="fw-semibold">Danh mục: </h4>
@@ -66,14 +66,14 @@
                     <p class="fs-5 mx-2">{{ $products->rom->name }}</p>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <div class="d-flex mt-2">
                             <h4 class="fw-semibold">Màu sắc: </h4>
                             <p class="fs-5 mx-2">{{ $products->color->name }}</p>
 
                         </div>
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-6">
                         <div class="d-flex mt-2">
                             <h4 class="fw-semibold">Màn hình: </h4>
                             <p class="fs-5 mx-2">{{ $products->screen->name }}</p>
@@ -81,52 +81,68 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3 d-flex mt-2">
+                    <div class="col-lg-6 d-flex mt-2">
                         <h4 class="fw-semibold">Giảm: </h4>
                         <p class="fs-5 mx-2 text-danger">{{ number_format($products->sale->price_sales, 0, ',', ',') }}đ
-                        </p>
+                        </p><br>
                     </div>
-                    <div class="col-lg-9 d-flex mt-2">
+                    <div class="col-lg-6 d-flex mt-2">
                         <h4 class="fw-semibold">Tình trạng: </h4>
                         <p class="fs-5 mx-2 text-success">Còn Hàng</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3">
-                        <div class="mt-4">
-
-                            <h1 class="fw-semibold text-danger">{{ number_format($products->price, 0, ',', ',') }}đ </h1>
-                        </div>
-                    </div>
-
-                </div>
-
-                <form action="{{ URL::to('/save-cart') }}" method="post">
-                    {{ @csrf_field(); }}
-                <div class="row mt-2">
-                    <div class="buttons_added">
-                        
-                            <div class="form-outline">
-                                <input name="number" type="number" id="typeNumber" class="form-control" min="1"
-                                    value="1" />
-                                <input name="id_hidden" type="hidden" id="typeNumber" class="form-control" min="1"
-                                    value="{{ $products->id }}" />
+                    <div class="col-lg-6 mt-2">
+                            <div class="d-flex">
+                                <h4 class="fw-semibold">Với Voucher: </h4>
+                                <p class="fs-5 mx-2 text-danger">{{ $products->sale->name }}</p>
                             </div>
                     </div>
-
                 </div>
-
-                <div class="wrap-addcart">
-                    <div class="row-flex">
-                        <button type="submit" class="row-addcart-btn mt-2">
-                            <span class="addcart-heading">Thêm giỏ hàng</span>
-                        </button>
-
-                        <button type="button" class="row-buy-btn mt-2">
-                            <span>Mua ngay</span>
-                        </button>
+                @foreach ($sales as $sale)
+                    <?php $total = $products->price + $sale->price_sales?>
+                    @if ($products->sale_id === $sale->id)
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="mt-2">
+                            
+                            <h1 class="fw-semibold text-danger">{{ number_format($products->price, 0, ',', ',') }}đ </h1>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-8 mt-3">
+                        <span class="home-product-item__price-old">{{  number_format($total, 0, ',', ',') }}đ</span>
                     </div>
                 </div>
+                @endif
+                @endforeach
+
+                <form action="{{ URL::to('/save-cart') }}" method="post">
+                    {{ @csrf_field() }}
+                    <div class="row mt-2">
+                        <div class="buttons_added">
+                            
+                                <div class="form-outline">
+                                    <input name="qty" type="number" id="typeNumber" class="form-control" min="1"
+                                        value="1" />
+                                    <input name="id_hidden" type="hidden" id="typeNumber" class="form-control" min="1"
+                                        value="{{ $products->id }}" />
+                                </div>
+                        </div>
+
+                    </div>
+
+                    <div class="wrap-addcart">
+                        <div class="row-flex mt-2">
+                            <button type="submit" class="row-addcart-btn">
+                                <span class="addcart-heading">Thêm giỏ hàng</span>
+                            </button>
+
+                            <button type="submit" class="row-buy-btn mt-2">
+                                <span>Mua ngay</span>
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -169,7 +185,7 @@
         </div>
     </div>
 
-    <div class="product-heading mt-4">SẢN PHẨM LIÊN QUAN THƯƠNG HIỆU - DANH MỤC</div>
+    <div class="product-heading mt-4">SẢN PHẨM LIÊN QUAN</div>
 
 
     <div class="row sm-gutter margin-b">
@@ -184,21 +200,23 @@
                     <h3 class="home-product-item__name">
                         Thương Hiệu: {{ $product->name }}
                     </h3>
-
+                    @foreach ($sales as $sale)
+                                <?php $total =  $sale->price_sales + $product->price ?>
+                            
+                        @if ($product->sale_id === $sale->id)
                     <div class="home-product-item__price">
 
-                        <span
-                            class="home-product-item__price-current text-center">{{ number_format($product->price, 0, ',', ',') }}đ</span>
+                        <span class="home-product-item__price-current ">{{ number_format($product->price, 0, ',', ',') }}đ</span>
+                        <span class="home-product-item__price-old">{{  number_format($total, 0, ',', ',') }}đ</span>
                     </div>
-
-                    <div class="home-product-item__favorite">
-                        <span class="home-product__hover-favorite">
-                            Yêu thích
-
-                        </span>
-                        <i class="home-product-item__favorite-icon fa-solid fa-heart"></i>
-
+                    <div class="home-product-item__sale-off">
+                        <span class="home-product-item__percent">Giảm: {{ number_format($sale->price_sales, 0, ',', ',') }}đ</span>
+    
+    
                     </div>
+                    @endif
+                    @endforeach
+
 
 
                     <div class="home-product-icon-action">
@@ -214,3 +232,4 @@
         @endforeach
     </div>
 @endsection
+

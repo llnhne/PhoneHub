@@ -74,15 +74,18 @@
                                 {{ $product->name }}
                             </h4>
 
+                            @foreach ($sales as $sale)
+                                <?php $total =  $sale->price_sales + $product->price ?>
+                            
+                            @if ($product->sale_id === $sale->id)
                             <div class="home-product-item__price">
 
 
-                                <span class="home-product-item__price-current text-center">{{  number_format($product->price, 0, ',', ',') }}đ</span>
-                            </div>
-                            @foreach ($sales as $sale)
                                 
+                                <span class="home-product-item__price-current fw-semibold">{{  number_format($product->price, 0, ',', ',') }}đ</span>
+                                <span class="home-product-item__price-old">{{  number_format($total, 0, ',', ',') }}đ</span>
+                            </div>
                             
-                            @if ($product->sale_id === $sale->id)
                                 
                             
                             <div class="home-product-item__sale-off">
