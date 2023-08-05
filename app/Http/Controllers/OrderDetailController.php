@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Mail\DetailEmail;
 use App\Models\Bill;
 use App\Models\Brand;
