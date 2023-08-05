@@ -56,7 +56,18 @@ class Banner extends Base
             array(
                 'field' => 'image',
                 'name' => 'Ảnh sản phẩm Banner',
-                'type' => 'images',
+                'type' => 'image',
+                'listing' => true,
+                'editing' => true,
+                'validate' => false,
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
+            ),
+            array(
+                'field' => 'status',
+                'name' => 'Status',
+                'type' => 'status',
                 'listing' => true,
                 'editing' => true,
                 'validate' => false,
@@ -111,16 +122,6 @@ class Banner extends Base
                 'name' => 'Xóa',
                 'type' => 'delete',
                 'filter' => 'delete',
-                'listing' => true,
-                'editing' => false,
-                'detail' => false,
-                'updating' => false,
-                'archive' => false
-            ),
-            array(
-                'field' => 'id',
-                'name' => 'Cập Nhật',
-                'type' => 'capnhat',
                 'listing' => true,
                 'editing' => false,
                 'detail' => false,

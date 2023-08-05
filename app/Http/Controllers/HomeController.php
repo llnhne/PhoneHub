@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -15,7 +16,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-
+        $banners = Banner::orderBy('id', 'desc')->where('status','1')->take(1)->get();
         $sales = Sale::all();
         $products = Product::orderBy('id', 'asc')->take(4)->get();
         $sale = Product::orderBy('id', 'desc')->take(5)->get();
@@ -27,7 +28,8 @@ class HomeController extends Controller
         'categories' => $categories,
         'sale' => $sale,
         'brands' => $brands,
-        'sales' => $sales
+        'sales' => $sales,
+        'banners' =>$banners
         ]);
     }
 

@@ -4,28 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Base;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Base;
 
-class Bill extends Base
+class Coupon extends Base
 {
     use HasFactory;
     use SoftDeletes;
 
-    public $title = 'Quản Lý Hóa Đơn';
-    public $titleupdate = 'Cập Nhật - Hóa Đơn';
-    public $titledetail = 'Chi Tiết - Hóa Đơn';
-    public $titlearchive = 'Đã Xóa Gần Đây - Quản Lý Hóa Đơn';
-    protected $fillable = [
-        'bill_name',
-        'user_name',
-        'email',
-        'phone_number',
-        'address',
-        'sum_price',
-        'description',
-        'user_id'
-    ];
+    public $title = 'Quản Lý Coupon';
+    public $titlecreate = 'Thêm Mới - Coupon';
+    public $titleupdate = 'Cập Nhật - Coupon';
+    public $titledetail = 'Chi Tiết - Coupon';
+    public $titlearchive = 'Đã Xóa Gần Đây - Quản Lý Coupon';
     public function configs()
     {
         // $defaultListingconfigs = parent::defaultlistingConfigs();
@@ -37,97 +28,68 @@ class Bill extends Base
                 'filter' => 'equal',
                 'sort' => true,
                 'listing' => true,
-                'editing' => true,
+                'editing' => false,
                 'detail' => true,
                 'updating' => false,
                 'archive' => true
             ),
             array(
-                'field' => 'bill_name',
-                'name' => 'Mã đơn hàng',
-                'type' => 'bill_name',
+                'field' => 'name',
+                'name' => 'Tên coupon',
+                'type' => 'name_coupon',
                 'filter' => 'like',
                 'sort' => true,
                 'listing' => true,
                 'editing' => true,
+                'validate' => 'required|max:100',
                 'detail' => true,
-                'updating' => false,
+                'updating' => true,
                 'archive' => true
             ),
             array(
-                'field' => 'user_name',
-                'name' => 'Tên khách hàng',
-                'type' => 'user_name',
-                'sort' => true,
+                'field' => 'coupon_code',
+                'name' => 'Mã giảm giá',
+                'type' => 'coupon_code',
+                'sort' => false,
+                'listing' => true,
+                'editing' => true,
+                'validate' => 'required|max:100',
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
+            ),
+            array(
+                'field' => 'coupon_time',
+                'name' => 'Số lượng mã',
+                'type' => 'coupon_time',
+                'sort' => false,
+                'listing' => true,
+                'editing' => true,
+                'validate' => 'required|min:2|max:10',
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
+            ),
+            array(
+                'field' => 'coupon_condition',
+                'name' => 'Tính năng mã',
+                'type' => 'coupon_condition',
+                'sort' => false,
+                'listing' => false,
+                'editing' => true,
+                'detail' => true,
+                'updating' => true,
+                'archive' => false
+            ),
+            array(
+                'field' => 'coupon_number',
+                'name' => 'Số % hoặc số tiền giảm',
+                'type' => 'coupon_number',
+                'sort' => false,
                 'listing' => true,
                 'editing' => true,
                 'detail' => true,
                 'updating' => true,
-                'archive' => false
-            ),
-            array(
-                'field' => 'email',
-                'name' => 'Email khách hàng',
-                'type' => 'email',
-                'sort' => false,
-                'listing' => false,
-                'editing' => true,
-                'detail' => true,
-                'updating' => true,
-                'archive' => false
-            ),
-            array(
-                'field' => 'phone_number',
-                'name' => 'Số điện thoại',
-                'type' => 'tel',
-                'sort' => false,
-                'listing' => false,
-                'editing' => true,
-                'detail' => true,
-                'updating' => true,
-                'archive' => false
-            ),
-            array(
-                'field' => 'address',
-                'name' => 'Địa chỉ',
-                'type' => 'address',
-                'sort' => false,
-                'listing' => false,
-                'editing' => true,
-                'detail' => true,
-                'updating' => true,
-                'archive' => false
-            ),
-            array(
-                'field' => 'sum_price',
-                'name' => 'Tổng tiền',
-                'type' => 'sum_price',
-                'sort' => true,
-                'listing' => true,
-                'editing' => true,
-                'detail' => true,
-                'updating' => true,
-                'archive' => false
-            ),
-            array(
-                'field' => 'description',
-                'name' => 'Ghi chú',
-                'type' => 'description',
-                'sort' => false,
-                'listing' => false,
-                'editing' => true,
-                'detail' => true,
-                'updating' => true,
-                'archive' => false
-            ),
-            array(
-                'field' => 'user_id',
-                'name' => 'Mã khách hàng',
-                'type' => 'user_id',
-                'listing' => false,
-                'editing' => true,
-                'detail' => true,
-                'updating' => false,
                 'archive' => false
             ),
             array(
@@ -171,6 +133,7 @@ class Bill extends Base
                 'detail' => false,
                 'updating' => false,
                 'archive' => false
+                
             ),
             array(
                 'field' => 'id',
@@ -185,7 +148,7 @@ class Bill extends Base
             ),
             array(
                 'field' => 'back',
-                'name' => 'Quay lại danh sách Hóa Đơn',
+                'name' => 'Quay lại danh sách Coupon',
                 'type' => 'back',
                 'listing' => false,
                 'editing' => false,

@@ -13,14 +13,14 @@ use Illuminate\Queue\SerializesModels;
 class DetailEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $bill;
+    public $bills;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(Bill $bill)
+    public function __construct(Bill $bills)
     {
-        $this->bill = $bill;
+        $this->bills = $bills;
     }
 
     /**
@@ -48,6 +48,13 @@ class DetailEmail extends Mailable
     }
     public function build()
     {
-        return $this->view('mail.showmail', ['bill' => $this->bill]);
+        $title = 'Test title';
+        $bills = $this->bills;
+      
+
+        return $this->view('mail.showmail', [
+            'bills' => $bills,
+            'title' => $title
+        ]);
     }
 }

@@ -4,20 +4,54 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Coupon;
 use App\Models\Sale;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Console\View\Components\Alert;
-use Illuminate\Contracts\Session\Session;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Session;
 
 session_start();
 
 class CartController extends Controller
 {
+    public function check_coupon(Request $request){
+        $data = $request->all();
+        // dd($data);
+        $coupon = Coupon::where('coupon_code',$data['coupon'])->first();
+        if($coupon){
+            $count_coupon = $coupon->count();
+            if($count_coupon > 0){
+                $coupon_session = Session::get('coupon');
+                if($coupon_session == true){
+                    $is_avaiable = 0;
+                    if($is_avaiable == 0){
+                        $cou[] = array(
+                            'coupon_code' => $coupon->coupon_code,
+                            'coupon_condition' => $coupon->coupon_condition,
+                            'coupon_number' => $coupon->coupon_number
+                        );
+                        Session::put('coupon',$cou);
+                    }
+                }else{
+                    $cou[] = array(
+                        'coupon_code' => $coupon->coupon_code,
+                        'coupon_condition' => $coupon->coupon_condition,
+                        'coupon_number' => $coupon->coupon_number
+                    );
+                    Session::put('coupon',$cou);
+                }
+                Session::save();
+                return Redirect()->back()->with('message','Thêm mã giảm giá thành công');
+            }
+        }else{
+            return Redirect()->back()->with('error','Mã giảm giá không tồn tại');
+        }
+    }
     public function save_cart(Request $request) {
         if (Auth::check()) {
             $user_id = Auth::user()->id;
@@ -91,7 +125,7 @@ class CartController extends Controller
         Session::save();
     }
     public function show_cart(){
-        
+        if (Auth::check()) {
         $brands = Brand::all();
         $categories = Category::all();
         $sales = Sale::all();
@@ -101,6 +135,10 @@ class CartController extends Controller
             'sales' => $sales
          
         ]);
+        return Redirect::to('/show-cart');
+        } else {
+            return Redirect::to('/login');
+        }
     }
     public function update_cart(Request $request){
         $rowId = $request->rowId_cart;
@@ -110,6 +148,7 @@ class CartController extends Controller
     }
     public function delete_to_cart($rowId){
         Cart::update($rowId,0);
+        Session::forget('coupon');
         return Redirect::to('show-cart');
     }
 }
