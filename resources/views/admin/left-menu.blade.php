@@ -60,6 +60,18 @@
         </li>
 
         <li>
+            <a href="{{ route('listing.index', ['model'=>'Coupon']) }}">
+                <i class="ti-ticket"></i>
+                <span> Quản lý coupon </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level" aria-expanded="false">
+                <li><a href="{{ route('listing.index', ['model'=>'Coupon']) }}">Danh sách</a></li>
+                <li><a href="{{ route('editing.create', ['model'=>'Coupon']) }}">Thêm</a></li>
+            </ul>
+        </li>
+
+        <li>
             <a href="{{ route('listing.index', ['model'=>'Banner']) }}">
                 <i class="ti-layers-alt"></i>
                 <span> Quản lý banner </span>

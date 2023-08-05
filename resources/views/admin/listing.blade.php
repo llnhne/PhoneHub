@@ -135,12 +135,40 @@
                                                     </td>
                                                 @break
 
-                                                @case('name')
+                                                @case('name_coupon')
                                                     <td class="align-middle">
                                                         {{ $record[$config['field']] }}
                                                     </td>
                                                 @break
 
+                                                @case('coupon_time')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
+                                                @case('coupon_number')
+                                                    <td class="align-middle">
+                                                        {{ number_format($record[$config['field']], 0, ',', ',') }}
+                                                    </td>
+                                                @break
+
+                                                @case('coupon_code')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+
+                                                @case('name')
+                                                    <td class="align-middle">
+                                                        {{ $record[$config['field']] }}
+                                                    </td>
+                                                @break
+                                                @case('status')
+                                                <td class="align-middle">
+                                                    {{ $record[$config['field']] }}
+                                                </td>
+                                                @break
                                                 @case('category_name')
                                                     <td class="align-middle">
                                                         {{ $record[$config['field']] }}
@@ -280,16 +308,7 @@
                                                         </form>
                                                 @break
 
-                                                @case('capnhat')
-                                                    <form method="POST" action="">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <td class="align-middle">
-                                                            <button type="submit" class="btn btn-success">Update</button>
-                                                            
-                                                        </td>
-                                                        </form>
-                                                @break
+                                                
 
                                                 @default
                                             @endswitch

@@ -8,7 +8,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Session;
 
 class VnpayController extends Controller
 {
@@ -27,7 +27,7 @@ class VnpayController extends Controller
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://phonehub.test:8080/orderdetail";
+        $vnp_Returnurl = "http://phonehub.test:8080/orderdetail"; //callback 
         $vnp_TmnCode = "UMAPOQ6B"; //Mã website tại VNPAY 
         $vnp_HashSecret = "RJMXZOTHNSZWZQPIWMEBUNWHIFDIUHDL"; //Chuỗi bí mật
 
@@ -87,8 +87,11 @@ class VnpayController extends Controller
         $returnData = array(
             'code' => '00', 'message' => 'success', 'data' => $vnp_Url
         );
+        // Lấy phản hồi từ VNPAY, ví dụ: 
+
         if (isset($_POST['redirect'])) {
-            DB::table('bills')
+           
+              DB::table('bills')
             ->insert([
                 'bill_name' => $bill_name,
                 'user_name' => $user_name,
@@ -101,11 +104,9 @@ class VnpayController extends Controller
                 'created_at' => $created_at,
                 'updated_at' => $updated_at
             ]);
-            
-
-            
+        session()->forget('cart'); 
             header('Location: ' . $vnp_Url);
-            Cart::destroy();
+           
             die();
         } else {
             echo json_encode($returnData);

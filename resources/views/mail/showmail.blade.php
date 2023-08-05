@@ -5,9 +5,9 @@
             <div class="card">
                 <div class="text-left logo p-2 px-5"> <img src="https://i.imgur.com/2zDU056.png" width="50"> </div>
                 <div class="invoice p-5">
-                    
+                    {{-- <h1>{{ $title }}</h1> --}}
                         <h5>Đặt Hàng Thành Công ! Chúng tôi sẽ liên lạc sớm để xác nhận đơn hàng.</h5><br> <span class="font-weight-bold d-block mt-4">Hello,
-                            {{ $bill->user_name }}</span><br>
+                            {{ $bills->user_name }}</span><br>
                         <span>Thông Tin Chi Tiết Hóa Đơn.</span><br>
                         <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
                             <table class="table table-borderless">
@@ -15,11 +15,11 @@
                                     <tr>
                                         <td>
                                             <div class="py-2"> <span class="d-block text-muted">Ngày Đặt
-                                                    Hàng</span> <span>{{ $bill->create_at }}</span> </div>
+                                                    Hàng</span> <span>{{ $bills->create_at }}</span> </div>
                                         </td><br>
                                         <td>
                                             <div class="py-2"> <span class="d-block text-muted">Mã Đơn Hàng</span>
-                                                <span>{{ $bill->bill_name }}</span>
+                                                <span>{{ $bills->bill_name }}</span>
                                             </div><br>
                                         </td>
                                         <td>
@@ -30,7 +30,7 @@
                                         </td>
                                         <td>
                                             <div class="py-2"> <span class="d-block text-muted">Địa Chỉ</span>
-                                                <span>{{ $bill->address }}</span>
+                                                <span>{{ $bills->address }}</span>
                                             </div><br>
                                         </td>
                                     </tr>
@@ -72,7 +72,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="text-right"> <span>{{ $bill->sum_price }}</span> </div>
+                                                <div class="text-right"> <span>{{ $bills->sum_price }}</span> </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -110,7 +110,7 @@
                                             </td>
                                             <td>
                                                 <div class="text-right"> <span
-                                                        class="font-weight-bold">{{ $bill->sum_price }}</span>
+                                                        class="font-weight-bold">{{ $bills->sum_price }}</span>
                                                 </div>
                                             </td>
                                         </tr>

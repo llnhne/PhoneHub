@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Chip;
@@ -30,6 +30,7 @@ class UpdatingController extends Controller
         $brands = Brand::all();
         $products = Product::all();
         $categories = Category::all();
+        $banners = Banner::all();
         $colors = Color::all();
         $rams = Ram::all();
         $roms = Rom::all();
@@ -50,7 +51,8 @@ class UpdatingController extends Controller
             'roms' => $roms,
             'chips' => $chips,
             'screens' => $screens,
-            'items' => $items
+            'items' => $items,
+            'banners' => $banners
         ]);
     }
 
@@ -65,6 +67,7 @@ class UpdatingController extends Controller
         $sales = Sale::all();
         $brands = Brand::all();
         $products = Product::all();
+        $banners = Banner::all();
         $categories = Category::all();
         $colors = Color::all();
         $rams = Ram::all();
@@ -91,43 +94,16 @@ class UpdatingController extends Controller
                         if ($request->file($config['field']) !== null) {
                             $name = $request->file($config['field'])->getClientOriginalName();
                             $path = $request->file($config['field'])->storeAs('public/images', $name);
-                            $items->{$config['field']} = '/storage/images/' . $name;
-
+                            $newImagePath = '/storage/images/' . $name;
+                    
                             // Xóa ảnh cũ chỉ khi có cập nhật ảnh mới
-                            if ($items->{$config['field']} && Storage::exists($items->{$config['field']}) && $request->hasFile($config['field'])) {
+                            if ($items->{$config['field']} && Storage::exists($items->{$config['field']}) && $items->{$config['field']} !== $newImagePath) {
                                 Storage::delete($items->{$config['field']});
                             }
-                        } else {
-                            // Giữ nguyên ảnh cũ nếu không có cập nhật ảnh
-                            $items->{$config['field']} = $items->{$config['field']};
+                    
+                            $items->{$config['field']} = $newImagePath;
                         }
                         break;
-                        case "images":
-                            if ($request->hasFile($config['field'])) {
-                                $images = $request->file($config['field']);
-                                $imagePaths = [];
-                        
-                                // Lưu trữ giá trị created_at ban đầu
-                                $created_at = $items->created_at;
-                        
-                                // Xóa ảnh cũ chỉ khi có cập nhật ảnh mới
-                                if ($items->{$config['field']} && $request->hasFile($config['field'])) {
-                                    Storage::delete($items->{$config['field']});
-                                }
-                        
-                                foreach ($images as $i => $image) {
-                                    $name = $image->getClientOriginalName();
-                                    $path = $image->storeAs('public/images', $name);
-                                    $imagePaths[] = '/storage/images/' . $path;
-                                }
-                        
-                                // Gán giá trị created_at ban đầu vào lại $items
-                                $items->created_at = $created_at;
-                            } else {
-                                // Giữ nguyên ảnh cũ nếu không có cập nhật ảnh
-                                $items->{$config['field']} = $items->{$config['field']};
-                            }
-                            break;
 
                     default:
                         $items->{$config['field']} = $request->input($config['field']);
@@ -154,7 +130,8 @@ class UpdatingController extends Controller
             'roms' => $roms,
             'chips' => $chips,
             'screens' => $screens,
-            'items' => $items
+            'items' => $items,
+            'banners' => $banners
         ]);
     }
 }

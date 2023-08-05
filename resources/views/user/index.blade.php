@@ -1,24 +1,22 @@
 @extends('layouts.user')
 @section('content')
 <div class="banner">
-    
-    <div class="grid wide">
-        <div class="slideshow">
-            <div class="slideshow-list">
-                
-
                 <div id="carouselExampleFade" class="carousel slide carousel-fade">
+                    
                     <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img src="{{ URL::asset('assetss/css/img/b2.jpg') }}" class="d-block w-100" alt="...">
+                        @php
+                            $i = 0;
+                        @endphp
+                        @foreach ($banners as $banner)
+                            @php
+                                $i++;
+                            @endphp
+                      <div class="carousel-item {{ $i==1 ? 'active' : '' }}">
+                        <img src="{{ $banner->image }}" class="d-block w-100" alt="...">
                       </div>
-                      <div class="carousel-item">
-                        <img src="{{ URL::asset('assetss/css/img/b2.jpg') }}" class="d-block w-100" alt="...">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="{{ URL::asset('assetss/css/img/b2.jpg') }}" class="d-block w-100" alt="...">
-                      </div>
+                      @endforeach
                     </div>
+                    
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Previous</span>
@@ -28,10 +26,6 @@
                       <span class="visually-hidden">Next</span>
                     </button>
                   </div>
-            </div>
-
-        </div>
-    </div>
 </div>
 <div class="container">
 <div class="grid wide">

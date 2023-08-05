@@ -17,6 +17,98 @@
                                 @if (!empty($configs))
                                     @foreach ($configs as $config)
                                         @switch($config['type'])
+                                            @case('name_coupon')
+                                            <?php $field = $config['field']; ?>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                        <div class="input-group flex-column">
+                                                            <input type="text" name="{{ $config['field'] }}"
+                                                                class="form-control @error($field) is-invalid @enderror"
+                                                                placeholder="{{ htmlspecialchars($config['name']) }}">
+                                                            @error($field)
+                                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @break
+
+                                            @case('coupon_code')
+                                                <?php $field = $config['field']; ?>
+                                                    
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group ">
+                                                                <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                <div class="input-group flex-column">
+                                                                    <input type="text" name="{{ $config['field'] }}"
+                                                                        class="form-control @error($field) is-invalid @enderror"
+                                                                        placeholder="{{ htmlspecialchars($config['name']) }}">
+                                                                    @error($field)
+                                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @break
+                                            
+                                                @case('coupon_time')
+                                                <?php $field = $config['field']; ?>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                            <div class="input-group flex-column">
+                                                                <input type="number" name="{{ $config['field'] }}"
+                                                                    class="form-control @error($field) is-invalid @enderror"
+                                                                    placeholder="{{ htmlspecialchars($config['name']) }}">
+                                                                @error($field)
+                                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @break
+    
+                                                @case('coupon_condition')
+                                                    <?php $field = $config['field']; ?>
+                                                        
+                                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                <div class="form-group ">
+                                                                    <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                    <div class="input-group flex-column">
+                                                                        
+                                                                        <select class="select2 form-control" data-toggle="select2" name="{{ $config['field'] }}">
+                                                                                <option value="1">Giảm theo %</option>
+                                                                                <option value="2">Giảm theo tiền</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @break
+                
+                                            @case('coupon_number')
+                                            <?php $field = $config['field']; ?>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                            <div class="input-group flex-column">
+                                                                <input type="text" name="{{ $config['field'] }}"
+                                                                    class="form-control @error($field) is-invalid @enderror"
+                                                                    placeholder="{{ htmlspecialchars($config['name']) }}">
+                                                                @error($field)
+                                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @break
+
                                             @case('product_name')
                                                 <?php $field = $config['field']; ?>
                                                 <div class="row">
@@ -182,6 +274,25 @@
                                                     
                                                     @break
 
+                                                    @case('status')
+                                                     
+                                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
+                                                                <div class="input-group">
+                                                                    <select class="select2 form-control" data-toggle="select2" name="{{ $config['field'] }}">
+                                                                        
+                                                                            <option value="0">Không Hiển Thị</option>
+                                                                            <option value="1">Hiển Thị</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @break
+
                                                     @case('sale_id')
                                                         
                                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -201,16 +312,7 @@
                                                         </div>
                                                         @break
 
-                                                    @case('images')
-                                                    <?php $field = $config['field']; ?>
-                                                        <label style="font-size: medium; font-weight:600;">{{ $config['name'] }}</label>
-                                                            
-                                                            <div class="mb-3">
-                                                            
-                                                                <input class="form-control" type="file" id="formFile" name="{{ $config['field'] }}[]" multiple>
-                                                                
-                                                              </div>
-                                                    @break
+                                                    
 
                                                     @case('brand_id')
                                                         <div class="row">

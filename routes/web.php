@@ -98,9 +98,10 @@ Route::post('/update-cart', [CartController::class, 'update_cart']);
 Route::get('/show-cart', [CartController::class, 'show_cart'])->name('cart.showcart');
 Route::get('/delete-to-cart/{rowId}', [CartController::class, 'delete_to_cart'])->name('cart.showcart');
 
+Route::post('/check-coupon', [CartController::class, 'check_coupon']);
 
 Route::post('/vnpay_payment', [VnpayController::class, 'vnpay_payment']);
-Route::get('/orderdetail',[OrderDetailController::class, 'index']);
+Route::post('/orderdetail',[OrderDetailController::class, 'index']);
 
 // Route::get('admin/register',function(){
 //     return view('admin.register');
